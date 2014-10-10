@@ -11,5 +11,5 @@
 This software has been written by:
 * Steven GERARD
 * Steven FOUGERON
-* Loïc TESSI
+* Loïc TESSIER
 * Corentin RAOULT

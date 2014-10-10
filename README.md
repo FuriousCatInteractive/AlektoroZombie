@@ -1,6 +1,6 @@
 # OctoberWonderjam
 # Team Furious Cat Interactive
-![logo wonderjam UQAC](/assets/img/gamejam.png)
+![logo-wonderjam-UQAC](gamejam.png)
 
 
 ## Description

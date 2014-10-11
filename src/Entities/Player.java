@@ -5,14 +5,16 @@ package Entities;
  */
 public class Player extends GameBaseEntity{
 
-    private static Player singleton;
+    static Player singleton = null;
 
     private Player() {
         super();
     }
 
     public Player getInstance() {
-        singleton = new Player();
+        if(singleton == null) {
+            singleton = new Player();
+        }
         return singleton;
     }
 }

@@ -1,3 +1,5 @@
 *.iml
 .idea/
 README.html
+*.log
+out/

@@ -120,4 +120,32 @@ public class BootSplash extends Sprite{
         sound.play();
         //sound.setVolume(40.0f);
     }
+
+    public void startBootSplash(RenderWindow window1){
+        BootSplash bootsplash1 = new BootSplash(window1);
+        long debut_bootsplash = System.currentTimeMillis();
+        int duree=6;
+
+        while (System.currentTimeMillis()-debut_bootsplash<duree*1000 && window1.isOpen()) {
+
+            if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
+                window1.close();
+            }
+            // On gère les événements
+            for (Event event : window1.pollEvents()) {
+                if (event.type == Event.Type.CLOSED) {
+                    // Si l'utilisateur clique sur la croix rouge alors on ferme
+                    // la fenêtre
+                    window1.close();
+                }
+            }
+
+            bootsplash1.update();
+            window1.draw(bootsplash1);
+
+            window1.display();
+            window1.clear(BLACK);
+        }
+        window1.close();
+    }
 }

@@ -111,6 +111,11 @@ public class Main {
                     pos = Mouse.getPosition(window1);
                     System.out.println(pos.x + " " + pos.y);
                 }
+                //clic de la souris
+                if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+                    event.asMouseEvent();
+                    System.out.println("clic!!");
+                }
             }
 
           /*  if(pos.y!=window1.getSize().y/2){

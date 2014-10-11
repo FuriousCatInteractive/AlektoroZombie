@@ -88,12 +88,13 @@ public class TextureManager {
         for(GameBaseEntity it: entityList) {
             if(it instanceof Mob) {
                 it.setTexture(loadTexture("rsc/img/poule.png"));
-                it.setScale(2f,2f);
+                it.setScale(3f,3f);
             }
             else if(it instanceof Player) {
                 it.setTexture(loadTexture("rsc/img/zombie.png"));
-                it.setScale(4f,4f);
+                it.setScale(3f,3f);
             }
+            updateTexture(it,it.getId(),1);
         }
     }
 

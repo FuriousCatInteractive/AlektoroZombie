@@ -1,7 +1,4 @@
-import Entities.EntityManager;
-import Entities.Mob;
-import Entities.MovableEntity;
-import Entities.Player;
+import Entities.*;
 import MoveBehavior.SeekMove;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
@@ -71,8 +68,6 @@ public class Main {
 
         Sprite test = new Sprite();
         Vector2i pos =new Vector2i(0,0);
-        test.setOrigin(test.getLocalBounds().width/2, test.getLocalBounds().height/2);
-        test.setPosition(window1.getSize().x/2,window1.getSize().y/2);
 
         int nbrChicken = 20;
         EntityManager manager = EntityManager.getIntance();
@@ -80,7 +75,7 @@ public class Main {
         manager.addEntity(player);
         for (int i=0; i<nbrChicken; ++i){
             try {
-                manager.addEntity(new Mob(i, new SeekMove(player), 10));
+                manager.addEntity(new Mob(i, new SeekMove(player), 1));
             }
             catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -88,6 +83,8 @@ public class Main {
         }
 
         TextureManager texManager= new TextureManager(manager.getEntityList());
+        player.setOrigin(player.getLocalBounds().width/2, player.getLocalBounds().height/2);
+        player.setPosition(window1.getSize().x/2,window1.getSize().y/2);
 
         while (window1.isOpen()){
 
@@ -146,14 +143,21 @@ public class Main {
                 System.out.println();
             }*/
 
-            window1.draw(player);
+            for(GameBaseEntity it : manager.getEntityList()) {
+                if(it instanceof Mob) {
+                    try {
+                        ((Mob) it).moveEntity();
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                texManager.updateTexture(it, it.getId(), 1);
+                window1.draw(it);
+            }
 
             window1.display();
             window1.clear(BLACK);
         }
-
-
     }
-
-
 }

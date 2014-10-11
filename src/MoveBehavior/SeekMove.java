@@ -17,11 +17,6 @@ public class SeekMove implements MoveBehavior{
     }
     @Override
     public Vector2f move(MovableEntity entity) {
-        return Vector2f.mul(normalize(Vector2f.sub(target.getPosition(), entity.getPosition())), entity.getMaxSpeed());
-    }
-
-    private Vector2f normalize(Vector2f vector) {
-        float norm = (float)Math.sqrt(Math.pow(vector.x, 2)+Math.pow(vector.y, 2));
-        return new Vector2f(vector.x/norm, vector.y/norm);
+        return Vector2f.mul(MathUtils.normalize(Vector2f.sub(target.getPosition(), entity.getPosition())), entity.getMaxSpeed());
     }
 }

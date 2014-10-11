@@ -18,8 +18,6 @@ import static org.jsfml.graphics.Color.*;
 
 public class Main {
 
-
-
     public static void main(String[] args) {
 
         int WINDOW_H = 700;
@@ -66,7 +64,6 @@ public class Main {
     }*/
 
 
-        Sprite test = new Sprite();
         Vector2i pos =new Vector2i(0,0);
 
         int nbrChicken = 20;
@@ -116,14 +113,18 @@ public class Main {
                 }
             }
 
-
-
           /*  if(pos.y!=window1.getSize().y/2){
                 float angle = (float)Math.atan((pos.x-window1.getSize().x/2)/(pos.y-window1.getSize().y/2));
                 test.setRotation((float)Math.toRadians(angle));
                 System.out.println();
             }*/
 
+            // Draw and update viewfinder
+            ViewFinder viewFinder = new ViewFinder();
+            viewFinder.updateViewFinder(pos, player.getPosition());
+            window1.draw(viewFinder);
+
+            // Draw and update Game entity
             for(GameBaseEntity it : manager.getEntityList()) {
                 if(it instanceof Mob) {
                     try {

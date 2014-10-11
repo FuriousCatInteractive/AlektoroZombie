@@ -22,21 +22,21 @@ public class EntityManager {
         return instance;
     }
 
-    public void addEntity(GameBaseEntity entity) {
+    public final static void addEntity(GameBaseEntity entity) {
         entityList.add(entity);
     }
 
-    public GameBaseEntity getEntity(String entity, int id) throws Exception{
+    public static GameBaseEntity getEntity(String entity, int id) throws Exception{
         for(GameBaseEntity it : entityList) {
             String[] str = it.getClass().getName().split("\\.");
             if(str[str.length-1].equals(entity) && it.getId() == id) {
                 return it;
             }
         }
-        throw new Exception(this.getClass().getName() + ": There a not this entity in the list");
+        throw new Exception("There a not this entity in the list");
     }
 
-    public List<GameBaseEntity> getEntityList() {
+    public static List<GameBaseEntity> getEntityList() {
         return entityList;
     }
 }

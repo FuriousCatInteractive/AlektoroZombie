@@ -3,7 +3,7 @@ package Entities;
 /**
  * Created by steven on 10/10/14.
  */
-public class Player extends GameBaseEntity{
+public class Player extends MovableEntity{
 
     static Player singleton = null;
 

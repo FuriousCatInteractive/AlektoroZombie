@@ -1,3 +1,5 @@
+import Entities.*;
+import MoveBehavior.SeekMove;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderWindow;
@@ -15,8 +17,6 @@ import java.util.Random;
 import static org.jsfml.graphics.Color.*;
 
 public class Main {
-
-
 
     public static void main(String[] args) {
 
@@ -64,14 +64,24 @@ public class Main {
     }*/
 
 
-        Sprite test = new Sprite();
-        TextureManagerEntity textureManager1 = new TextureManagerEntity(test, false);
         Vector2i pos =new Vector2i(0,0);
-        test.setOrigin(test.getLocalBounds().width/2, test.getLocalBounds().height/2);
-        test.setPosition(window1.getSize().x/2,window1.getSize().y/2);
 
+        int nbrChicken = 20;
+        EntityManager manager = EntityManager.getIntance();
+        Player player = Player.getInstance();
+        manager.addEntity(player);
+        for (int i=0; i<nbrChicken; ++i){
+            try {
+                manager.addEntity(new Mob(i, new SeekMove(player), 1));
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-
+        TextureManager texManager= new TextureManager(manager.getEntityList());
+        player.setOrigin(player.getLocalBounds().width/2, player.getLocalBounds().height/2);
+        player.setPosition(window1.getSize().x/2,window1.getSize().y/2);
 
         while (window1.isOpen()){
 
@@ -101,22 +111,10 @@ public class Main {
                     pos = Mouse.getPosition(window1);
                     System.out.println(pos.x + " " + pos.y);
                 }
-            }
-
-            if(pos.x+pos.y>=window1.getSize().x){
-                if(window1.getSize().x-pos.x+pos.y>=window1.getSize().x){
-                    textureManager1.updateTexture(test,1,false);
-                }
-                else{
-                    textureManager1.updateTexture(test,3,false);
-                }
-            }
-            if(pos.x+pos.y<=window1.getSize().x) {
-                if (window1.getSize().x - pos.x + pos.y <= window1.getSize().x) {
-                    textureManager1.updateTexture(test, 4,false);
-                }
-                else{
-                    textureManager1.updateTexture(test,2,false);
+                //clic de la souris
+                if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+                    event.asMouseEvent();
+                    System.out.println("clic!!");
                 }
             }
 
@@ -126,16 +124,30 @@ public class Main {
                 System.out.println();
             }*/
 
+            // Draw and update viewfinder
+            ViewFinder viewFinder = new ViewFinder();
+            viewFinder.updateViewFinder(pos, player.getPosition());
+            window1.draw(viewFinder);
 
-
-            window1.draw(test);
+            // Draw and update Game entity
+            for(GameBaseEntity it : manager.getEntityList()) {
+                if(it instanceof Mob) {
+                    try {
+                        ((Mob) it).moveEntity();
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if(it instanceof Player) {
+                    player.updateDirection(pos, window1.getSize());
+                }
+                texManager.updateTexture(it, it.getId(), it.getDirection());
+                window1.draw(it);
+            }
 
             window1.display();
             window1.clear(BLACK);
         }
-
-
     }
-
-
 }

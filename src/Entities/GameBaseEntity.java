@@ -17,6 +17,10 @@ public abstract class GameBaseEntity extends Sprite{
     private boolean isVisible;
     protected int id;
 
+
+
+    private int direction;
+
     /**
      * Default constructor of the GameBaseEntity
      */
@@ -27,6 +31,7 @@ public abstract class GameBaseEntity extends Sprite{
         this.radius = 0;
         this.isAlive = true;
         this.isVisible = false;
+        this.direction = 1;
     }
 
     //  Accessors   //
@@ -62,6 +67,7 @@ public abstract class GameBaseEntity extends Sprite{
     public void setVisible(boolean isVisible) {
         this.isVisible = isVisible;
     }
+
     
     public void setPositionEntity(boolean cartesien, int XOrAngle, int YOrRadius)
     {
@@ -82,4 +88,13 @@ public abstract class GameBaseEntity extends Sprite{
     		
     	}
     }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
 }
+

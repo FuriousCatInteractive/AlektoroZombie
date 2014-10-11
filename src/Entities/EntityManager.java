@@ -8,8 +8,8 @@ import java.util.Map;
  * Created by steven on 10/11/14.
  */
 public class EntityManager {
-    static List<GameBaseEntity> entityList = new ArrayList<GameBaseEntity>();
-    static EntityManager instance = null;
+    static private List<GameBaseEntity> entityList = new ArrayList<GameBaseEntity>();
+    static private EntityManager instance = null;
 
     private EntityManager() {
 
@@ -34,5 +34,9 @@ public class EntityManager {
             }
         }
         throw new Exception(this.getClass().getName() + ": There a not this entity in the list");
+    }
+
+    public List<GameBaseEntity> getEntityList() {
+        return entityList;
     }
 }

@@ -7,7 +7,7 @@ import org.jsfml.system.Vector2f;
  * Created by steven on 10/10/14.
  */
 public abstract class MovableEntity extends GameBaseEntity {
-    private MoveBehavior moveStrategy;
+    protected MoveBehavior moveStrategy;
     private int maxSpeed;
 
     public MovableEntity() {

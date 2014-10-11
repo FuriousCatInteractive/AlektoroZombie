@@ -1,10 +1,8 @@
 import Entities.*;
+import GraphicsEntities.ViewFinder;
 import MoveBehavior.SeekMove;
-import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderWindow;
-import org.jsfml.graphics.Sprite;
-import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
@@ -12,13 +10,9 @@ import org.jsfml.window.Mouse;
 import org.jsfml.window.VideoMode;
 import org.jsfml.window.event.Event;
 
-import java.util.Random;
-
 import static org.jsfml.graphics.Color.*;
 
 public class Main {
-
-
 
     public static void main(String[] args) {
 
@@ -66,7 +60,6 @@ public class Main {
     }*/
 
 
-        Sprite test = new Sprite();
         Vector2i pos =new Vector2i(0,0);
 
         int nbrChicken = 20;
@@ -116,14 +109,18 @@ public class Main {
                 }
             }
 
-
-
           /*  if(pos.y!=window1.getSize().y/2){
                 float angle = (float)Math.atan((pos.x-window1.getSize().x/2)/(pos.y-window1.getSize().y/2));
                 test.setRotation((float)Math.toRadians(angle));
                 System.out.println();
             }*/
 
+            // Draw and update viewfinder
+            ViewFinder viewFinder = new ViewFinder();
+            viewFinder.updateViewFinder(pos, player.getPosition());
+            window1.draw(viewFinder);
+
+            // Draw and update Game entity
             for(GameBaseEntity it : manager.getEntityList()) {
                 if(it instanceof Mob) {
                     try {

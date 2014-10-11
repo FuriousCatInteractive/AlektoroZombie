@@ -42,17 +42,9 @@ public abstract class GameBaseEntity extends Sprite{
         return radius;
     }
 
-    public void setRadius(int radius) {
-        this.radius = radius;
-    }
-
     public int getAngle() {
 
         return angle;
-    }
-
-    public void setAngle(int angle) {
-        this.angle = angle;
     }
 
     public boolean isAlive() {
@@ -69,5 +61,25 @@ public abstract class GameBaseEntity extends Sprite{
 
     public void setVisible(boolean isVisible) {
         this.isVisible = isVisible;
+    }
+    
+    public void setPositionEntity(boolean cartesien, int XOrAngle, int YOrRadius)
+    {
+    	if(cartesien){
+    		this.setPosition(XOrAngle, YOrRadius);
+    		this.radius = (int) Math.sqrt(Math.pow(XOrAngle, 2) + Math.pow(YOrRadius, 2));
+    		if(radius>0){
+    			angle = (int) Math.atan(YOrRadius/XOrAngle);
+    		}else if(radius<0){
+    			angle = (int) (Math.atan(YOrRadius/XOrAngle)+Math.PI);
+    		}
+    	}
+    	else
+    	{
+    		this.angle = XOrAngle;
+    		this.radius = YOrRadius;
+    		this.setPosition((int)(radius * Math.cos(angle)), (int)(radius * Math.sin(angle)));
+    		
+    	}
     }
 }

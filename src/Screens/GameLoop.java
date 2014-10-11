@@ -48,6 +48,14 @@ public class GameLoop extends cScreen {
 
         TextureManager texManager= new TextureManager(manager.getEntityList());
 
+        try {
+            PlayerSpawnManager.placement((Player) EntityManager.getEntity("Player", 0), App);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
         while (App.isOpen()){
 
             if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
@@ -69,7 +77,12 @@ public class GameLoop extends cScreen {
                 //clic de la souris
                 if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                     event.asMouseEvent();
-                    System.out.println("clic!!");
+                    try {
+                        ((Player)EntityManager.getEntity("Player", 0)).fire();
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
 
@@ -80,9 +93,9 @@ public class GameLoop extends cScreen {
 
             // Draw and update Game entity
             for(GameBaseEntity it : manager.getEntityList()) {
-                if(it instanceof Mob) {
+                if(!(it instanceof Player)) {
                     try {
-                        ((Mob) it).moveEntity();
+                        ((MovableEntity) it).moveEntity();
                     }
                     catch (Exception e) {
                         System.out.println(e.getMessage());

@@ -19,8 +19,8 @@ public class PlaceMobs {
 	
 	
 
-	public PlaceMobs(Player player){
-		LE = DeserializationListEnemy();
+	public PlaceMobs(Player player, String songTitle){
+		LE = DeserializationListEnemy(songTitle);
 		for(int i = 0; i < LE.lenght();i++)
 		{
 			listMobs[i] = new Mob(i, new SeekMove(player), 1);
@@ -28,16 +28,16 @@ public class PlaceMobs {
 		cptInit = 0;
 	}
 	
-	public void placement(int angleMob, GameBaseEntity Mob)
+	public void placement(int angleMob)
 	{
 		listMobs[cptInit].setPositionEntity(false, angleMob, radiusSpawnMobs);
 		cptInit++;
 	}
 	
-	public ListEnemy DeserializationListEnemy()
+	public ListEnemy DeserializationListEnemy(String songTitle)
     {
         try {
-            FileInputStream fis = new FileInputStream("Zelda2.serial");
+            FileInputStream fis = new FileInputStream(songTitle);
             ObjectInputStream ois= new ObjectInputStream(fis);
             try
             {   
@@ -62,5 +62,9 @@ public class PlaceMobs {
             return LE;
         }
         return null;
-    }	
+    }
+	
+	public Mob[] getMobsList(){
+		return listMobs;
+	}
 }

@@ -1,6 +1,7 @@
 package Entities;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,21 +9,21 @@ import java.util.Map;
  * Created by steven on 10/11/14.
  */
 public class EntityManager {
-    static private List<GameBaseEntity> entityList = new ArrayList<GameBaseEntity>();
+    static private List<GameBaseEntity> entityList = new LinkedList<GameBaseEntity>();
     static private EntityManager instance = null;
 
     private EntityManager() {
 
     }
 
-    public final static EntityManager getIntance() {
+    public static EntityManager getIntance() {
         if(instance == null) {
             instance = new EntityManager();
         }
         return instance;
     }
 
-    public final static void addEntity(GameBaseEntity entity) {
+    public static void addEntity(GameBaseEntity entity) {
         entityList.add(entity);
     }
 
@@ -34,6 +35,11 @@ public class EntityManager {
             }
         }
         throw new Exception("There a not this entity in the list");
+    }
+
+    public static void deleteEntity(GameBaseEntity entity) {
+        System.out.println(entity.getClass().getName() + ": is deleting");
+        entityList.remove(entity);
     }
 
     public static List<GameBaseEntity> getEntityList() {

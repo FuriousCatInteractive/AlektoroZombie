@@ -2,7 +2,11 @@ package Screens;
 
 import static org.jsfml.graphics.Color.BLACK;
 
+
 import java.util.ArrayList;
+
+
+import Entities.*;
 
 import Graphics.TextureManager;
 
@@ -12,10 +16,6 @@ import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 
-import Entities.EntityManager;
-import Entities.GameBaseEntity;
-import Entities.Mob;
-import Entities.Player;
 import GraphicsEntities.ViewFinder;
 import PlaceEntities.PlaceMobs;
 import PlaceEntities.PlacePlayer;
@@ -24,6 +24,7 @@ import PlaceEntities.PlacePlayer;
  * Created by coco on 14-10-11.
  */
 public class GameLoop extends cScreen {
+
 
     public int Run(RenderWindow App) {
 
@@ -100,3 +101,88 @@ public class GameLoop extends cScreen {
         return -1;//exit
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

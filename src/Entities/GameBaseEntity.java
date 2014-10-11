@@ -16,6 +16,9 @@ public abstract class GameBaseEntity extends Sprite{
     // Allow to know if the entity is displayable or not
     private boolean isVisible;
     protected int id;
+
+
+
     private int direction;
 
     /**
@@ -83,6 +86,14 @@ public abstract class GameBaseEntity extends Sprite{
     		this.setPosition((int)(radius * Math.cos(angle)), (int)(radius * Math.sin(angle)));
     		
     	}
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
     }
 }
 

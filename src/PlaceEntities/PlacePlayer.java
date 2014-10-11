@@ -12,8 +12,8 @@ public class PlacePlayer {
 		
 	}
 	
-	protected void placement(GameBaseEntity entity, int pos X, int pos Y)
+	/*protected void placement(GameBaseEntity entity, int pos X, int pos Y)
 	{
 		setPositionEntity(true, )
-	}
+	}*/
 }

@@ -31,6 +31,7 @@ public abstract class GameBaseEntity extends Sprite{
         this.radius = 0;
         this.isAlive = true;
         this.isVisible = false;
+        this.direction = 1;
     }
 
     //  Accessors   //

@@ -116,26 +116,7 @@ public class Main {
                 }
             }
 
-            if(pos.x+pos.y>=window1.getSize().x){
-                if(window1.getSize().x-pos.x+pos.y>=window1.getSize().x){
-                    //textureManager1.updateTexture(test,1);
-                   player.setDirection(1);
-                }
-                else{
-                    //textureManager1.updateTexture(test,3);
-                    player.setDirection(3);
-                }
-            }
-            if(pos.x+pos.y<=window1.getSize().x) {
-                if (window1.getSize().x - pos.x + pos.y <= window1.getSize().x) {
-                   // textureManager1.updateTexture(test, 4);
-                    player.setDirection(4);
-                }
-                else{
-                    //textureManager1.updateTexture(test,2);
-                    player.setDirection(2);
-                }
-            }
+
 
           /*  if(pos.y!=window1.getSize().y/2){
                 float angle = (float)Math.atan((pos.x-window1.getSize().x/2)/(pos.y-window1.getSize().y/2));
@@ -152,7 +133,10 @@ public class Main {
                         System.out.println(e.getMessage());
                     }
                 }
-                texManager.updateTexture(it, it.getId(), 1);
+                if(it instanceof Player) {
+                    player.updateDirection(pos, window1.getSize());
+                }
+                texManager.updateTexture(it, it.getId(), it.getDirection());
                 window1.draw(it);
             }
 

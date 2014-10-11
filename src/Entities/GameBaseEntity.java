@@ -15,6 +15,7 @@ public abstract class GameBaseEntity extends Sprite{
     private boolean isAlive;
     // Allow to know if the entity is displayable or not
     private boolean isVisible;
+    protected int id;
 
     /**
      * Default constructor of the GameBaseEntity
@@ -29,6 +30,14 @@ public abstract class GameBaseEntity extends Sprite{
     }
 
     //  Accessors   //
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getRadius() {
         return radius;
     }

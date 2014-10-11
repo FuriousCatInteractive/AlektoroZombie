@@ -9,6 +9,7 @@ public class Player extends MovableEntity{
 
     private Player() {
         super();
+        id = 0;
     }
 
     public Player getInstance() {

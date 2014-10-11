@@ -7,15 +7,18 @@ import MoveBehavior.MoveBehavior;
  */
 public abstract class MovableEntity extends GameBaseEntity {
     private MoveBehavior moveStrategy;
+    private int maxSpeed;
 
     public MovableEntity() {
         super();
         moveStrategy = null;
+        maxSpeed = 0;
     }
 
-    public MovableEntity(MoveBehavior moveStrategy) {
+    public MovableEntity(MoveBehavior moveStrategy, int maxSpeed) {
         super();
         this.moveStrategy = moveStrategy;
+        this.maxSpeed = maxSpeed;
     }
 
     public void move() throws Exception{

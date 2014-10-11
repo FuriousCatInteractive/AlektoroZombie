@@ -7,52 +7,57 @@ import java.nio.file.Paths;
 /**
  * Created by coco on 14-10-10.
  */
-public class TextureManager {
+public class TextureManagerEntity {
 
     private int compteurAnimation;
 
-    public TextureManager(Sprite sprite){
+    public TextureManagerEntity(Sprite sprite, boolean mob){
         compteurAnimation=0;
         Texture poule_spriteSheet = loadTexture("rsc/img/zombie.png");
 
         sprite.setTexture(poule_spriteSheet);
 
-        updateTexture(sprite,3);
+        updateTexture(sprite,3, mob);
         sprite.setScale(4f,4f);
-        System.out.println(sprite.getGlobalBounds());
+        //System.out.println(sprite.getGlobalBounds());
 
 
     }
 
-    public void updateTexture(Sprite sprite, int direction){
+    public void updateTexture(Sprite sprite, int direction, boolean mob){
         IntRect rect ;
 
-        compteurAnimation++;
-        if(compteurAnimation==4)
+        if(mob){
+            compteurAnimation++;
+            if(compteurAnimation==60)
+                compteurAnimation=0;
+            //System.out.println(compteurAnimation);
+        }
+        else
             compteurAnimation=0;
-        System.out.println(compteurAnimation);
+
 
         switch (direction){
             case 1://bas
-                 rect = new IntRect((compteurAnimation)*sprite.getTexture().getSize().x/4,
+                 rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
                         0,
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
                 break;
             case 2:
-                rect = new IntRect((compteurAnimation)*sprite.getTexture().getSize().x/4,
+                rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
                          sprite.getTexture().getSize().y/4,
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
                 break;
             case 3:
-                rect = new IntRect((compteurAnimation)*sprite.getTexture().getSize().x/4,
+                rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/2,
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
                 break;
             case 4:
-                rect = new IntRect((compteurAnimation)*sprite.getTexture().getSize().x/4,
+                rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
                         3*(sprite.getTexture().getSize().y/4),
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
@@ -64,7 +69,7 @@ public class TextureManager {
                         sprite.getTexture().getSize().y/4);
                 break;
         }
-        System.out.println(rect);
+        //System.out.println(rect);
         sprite.setTextureRect(rect);
     }
 

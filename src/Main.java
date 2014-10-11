@@ -1,3 +1,8 @@
+import Entities.EntityManager;
+import Entities.Mob;
+import Entities.MovableEntity;
+import Entities.Player;
+import MoveBehavior.SeekMove;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderWindow;
@@ -65,13 +70,24 @@ public class Main {
 
 
         Sprite test = new Sprite();
-        TextureManagerEntity textureManager1 = new TextureManagerEntity(test, false);
         Vector2i pos =new Vector2i(0,0);
         test.setOrigin(test.getLocalBounds().width/2, test.getLocalBounds().height/2);
         test.setPosition(window1.getSize().x/2,window1.getSize().y/2);
 
+        int nbrChicken = 20;
+        EntityManager manager = EntityManager.getIntance();
+        Player player = Player.getInstance();
+        manager.addEntity(player);
+        for (int i=0; i<nbrChicken; ++i){
+            try {
+                manager.addEntity(new Mob(i, new SeekMove(player), 10));
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-
+        TextureManager texManager= new TextureManager(manager.getEntityList());
 
         while (window1.isOpen()){
 
@@ -105,18 +121,22 @@ public class Main {
 
             if(pos.x+pos.y>=window1.getSize().x){
                 if(window1.getSize().x-pos.x+pos.y>=window1.getSize().x){
-                    textureManager1.updateTexture(test,1,false);
+                    //textureManager1.updateTexture(test,1);
+                   player.setDirection(1);
                 }
                 else{
-                    textureManager1.updateTexture(test,3,false);
+                    //textureManager1.updateTexture(test,3);
+                    player.setDirection(3);
                 }
             }
             if(pos.x+pos.y<=window1.getSize().x) {
                 if (window1.getSize().x - pos.x + pos.y <= window1.getSize().x) {
-                    textureManager1.updateTexture(test, 4,false);
+                   // textureManager1.updateTexture(test, 4);
+                    player.setDirection(4);
                 }
                 else{
-                    textureManager1.updateTexture(test,2,false);
+                    //textureManager1.updateTexture(test,2);
+                    player.setDirection(2);
                 }
             }
 
@@ -125,8 +145,6 @@ public class Main {
                 test.setRotation((float)Math.toRadians(angle));
                 System.out.println();
             }*/
-
-
 
             window1.draw(test);
 

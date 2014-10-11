@@ -1,6 +1,7 @@
 
 import Entities.GameBaseEntity;
 import Entities.Mob;
+import Entities.MovableEntity;
 import Entities.Player;
 import org.jsfml.graphics.*;
 
@@ -11,57 +12,50 @@ import java.util.List;
 /**
  * Created by coco on 14-10-10.
  */
-public class TextureManagerEntity {
+public class TextureManager {
 
-    private int compteurAnimation;
+    private int compteurAnimation[];
 
-    public TextureManagerEntity(Sprite sprite, boolean mob){
-        compteurAnimation=0;
-        Texture poule_spriteSheet = loadTexture("rsc/img/zombie.png");
+    public TextureManager(List<GameBaseEntity> entityList){
 
-        sprite.setTexture(poule_spriteSheet);
+        for(int i=0;i<entityList.size(); i++){
+            compteurAnimation[i]=0;
+        }
 
-        updateTexture(sprite,3, mob);
-        sprite.setScale(4f,4f);
-        //System.out.println(sprite.getGlobalBounds());
-
-
+        mergeTextureSprite(entityList);
     }
 
-    public void updateTexture(Sprite sprite, int direction, boolean mob){
+    public void updateTexture(Sprite sprite,int numero, int direction){
         IntRect rect ;
 
-        if(mob){
-            compteurAnimation++;
-            if(compteurAnimation==60)
-                compteurAnimation=0;
+        if(sprite instanceof Mob) {
+            compteurAnimation[numero]++;
+            if (compteurAnimation[numero] == 60)
+                compteurAnimation[numero] = 0;
             //System.out.println(compteurAnimation);
         }
-        else
-            compteurAnimation=0;
-
 
         switch (direction){
             case 1://bas
-                 rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
+                rect = new IntRect((compteurAnimation[numero]/15)*sprite.getTexture().getSize().x/4,
                         0,
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
                 break;
             case 2:
-                rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
-                         sprite.getTexture().getSize().y/4,
+                rect = new IntRect((compteurAnimation[numero]/15)*sprite.getTexture().getSize().x/4,
+                        sprite.getTexture().getSize().y/4,
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
                 break;
             case 3:
-                rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
+                rect = new IntRect((compteurAnimation[numero]/15)*sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/2,
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
                 break;
             case 4:
-                rect = new IntRect((compteurAnimation/15)*sprite.getTexture().getSize().x/4,
+                rect = new IntRect((compteurAnimation[numero]/15)*sprite.getTexture().getSize().x/4,
                         3*(sprite.getTexture().getSize().y/4),
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);
@@ -94,10 +88,18 @@ public class TextureManagerEntity {
         for(GameBaseEntity it: entityList) {
             if(it instanceof Mob) {
                 it.setTexture(loadTexture("rsc/img/poule.png"));
+                it.setScale(2f,2f);
             }
             else if(it instanceof Player) {
                 it.setTexture(loadTexture("rsc/img/zombi.png"));
+                it.setScale(4f,4f);
             }
+        }
+    }
+
+    public void updateList(List<GameBaseEntity> entityList){
+        for(GameBaseEntity it: entityList){
+            updateTexture(it, it.getId(),it.getDirection());
         }
     }
 }

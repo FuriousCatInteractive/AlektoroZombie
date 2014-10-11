@@ -1,6 +1,7 @@
 package Entities;
 
 import MoveBehavior.MoveBehavior;
+import org.jsfml.system.Vector2f;
 
 /**
  * Created by steven on 10/10/14.
@@ -26,7 +27,8 @@ public abstract class MovableEntity extends GameBaseEntity {
             throw new Exception(this.getClass().getName() + ": Have not move behavior");
         }
         else {
-            moveStrategy.move(this);
+            Vector2f velocity = moveStrategy.move(this);
+            this.setPosition(Vector2f.add(this.getPosition(), velocity));
         }
     }
 
@@ -36,5 +38,13 @@ public abstract class MovableEntity extends GameBaseEntity {
 
     public void setMoveStrategy(MoveBehavior moveStrategy) {
         this.moveStrategy = moveStrategy;
+    }
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
 }

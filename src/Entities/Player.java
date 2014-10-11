@@ -10,9 +10,10 @@ public class Player extends MovableEntity{
     private Player() {
         super();
         id = 0;
+        this.setPosition(50, 50);
     }
 
-    public Player getInstance() {
+    public final static Player getInstance() {
         if(singleton == null) {
             singleton = new Player();
         }

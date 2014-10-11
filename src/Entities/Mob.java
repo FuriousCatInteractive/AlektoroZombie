@@ -9,5 +9,11 @@ public class Mob extends MovableEntity{
     public Mob(int id, MoveBehavior moveStrategy, int maxSpeed) {
         super(moveStrategy, maxSpeed);
         this.id = id;
+        this.setPosition(0,0);
+    }
+    public Mob(int id, MoveBehavior moveStrategy, int maxSpeed, int x, int y) {
+        super(moveStrategy, maxSpeed);
+        this.id = id;
+        this.setPosition(x,y);
     }
 }

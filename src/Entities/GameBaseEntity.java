@@ -5,7 +5,7 @@ import org.jsfml.graphics.Sprite;
 /**
  * Created by steven on 10/10/14.
  */
-public class GameBaseEntity extends Sprite{
+public abstract class GameBaseEntity extends Sprite{
 
     // Angle of the entity relative to origin
     private int angle;

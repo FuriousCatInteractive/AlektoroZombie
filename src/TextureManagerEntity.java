@@ -1,8 +1,12 @@
 
+import Entities.GameBaseEntity;
+import Entities.Mob;
+import Entities.Player;
 import org.jsfml.graphics.*;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Created by coco on 14-10-10.
@@ -86,4 +90,14 @@ public class TextureManagerEntity {
         return textureSprite;
     }
 
+    public void mergeTextureSprite(List<GameBaseEntity> entityList) {
+        for(GameBaseEntity it: entityList) {
+            if(it instanceof Mob) {
+                it.setTexture(loadTexture("rsc/img/poule.png"));
+            }
+            else if(it instanceof Player) {
+                it.setTexture(loadTexture("rsc/img/zombi.png"));
+            }
+        }
+    }
 }

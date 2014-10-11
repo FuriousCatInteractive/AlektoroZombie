@@ -1,18 +1,15 @@
 import Entities.*;
+import Graphics.TextureManager;
+import GraphicsEntities.ViewFinder;
 import MoveBehavior.SeekMove;
-import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderWindow;
-import org.jsfml.graphics.Sprite;
-import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.VideoMode;
 import org.jsfml.window.event.Event;
-
-import java.util.Random;
 
 import static org.jsfml.graphics.Color.*;
 
@@ -95,17 +92,7 @@ public class Main {
                     // la fenêtre
                     window1.close();
                 }
-               /* if (event.type == Event.Type.KEY_PRESSED) {
-                    event.asKeyEvent();
-                    if (Keyboard.isKeyPressed(Keyboard.Key.LEFT))
-                        textureManager1.updateTexture(test, 2);
-                    if (Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
-                        textureManager1.updateTexture(test,3);
-                    if (Keyboard.isKeyPressed(Keyboard.Key.UP))
-                        textureManager1.updateTexture(test,4);
-                    if (Keyboard.isKeyPressed(Keyboard.Key.DOWN))
-                        textureManager1.updateTexture(test,1);
-                }*/
+
                 if (event.type == Event.Type.MOUSE_MOVED) {
                     event.asMouseEvent();
                     pos = Mouse.getPosition(window1);
@@ -118,22 +105,19 @@ public class Main {
                 }
             }
 
-          /*  if(pos.y!=window1.getSize().y/2){
-                float angle = (float)Math.atan((pos.x-window1.getSize().x/2)/(pos.y-window1.getSize().y/2));
-                test.setRotation((float)Math.toRadians(angle));
-                System.out.println();
-            }*/
+            player.fire();
 
             // Draw and update viewfinder
             ViewFinder viewFinder = new ViewFinder();
-            viewFinder.updateViewFinder(pos, player.getPosition());
+            viewFinder.updateViewFinder(pos, player);
+
             window1.draw(viewFinder);
 
             // Draw and update Game entity
             for(GameBaseEntity it : manager.getEntityList()) {
-                if(it instanceof Mob) {
+                if(!(it instanceof Player)) {
                     try {
-                        ((Mob) it).moveEntity();
+                        ((MovableEntity) it).moveEntity();
                     }
                     catch (Exception e) {
                         System.out.println(e.getMessage());

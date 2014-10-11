@@ -1,5 +1,7 @@
 package Screens;
 
+import org.jsfml.audio.Sound;
+import org.jsfml.audio.SoundBuffer;
 import org.jsfml.graphics.*;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
@@ -74,6 +76,7 @@ public class Menu extends cScreen{
         {
             alpha = alpha_max;
         }*/
+        //startMusic("rsc/sound/king.it.ogg");
 
         while (Running)
         {
@@ -154,6 +157,25 @@ public class Menu extends cScreen{
 
         //Never reaching this point normally, but just in case, exit the application
         return (-1);
+    }
+
+    private void startMusic(String path)
+    {
+        SoundBuffer soundBuffer = new SoundBuffer();
+        try {
+            soundBuffer.loadFromFile(Paths.get(path));
+            System.out.println("Sound duration: " + soundBuffer.getDuration().asSeconds() + " seconds");
+        } catch(IOException ex) {
+            //Something went wrong
+            System.err.println("Failed to load the sound:");
+            ex.printStackTrace();
+        }
+
+        //Create a sound and set its buffer
+        Sound sound = new Sound();
+        sound.setBuffer(soundBuffer);
+        sound.play();
+        //sound.setVolume(40.0f);
     }
 
 }

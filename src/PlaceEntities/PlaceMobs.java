@@ -1,7 +1,9 @@
 package PlaceEntities;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 import Entities.GameBaseEntity;
@@ -11,46 +13,47 @@ import MoveBehavior.SeekMove;
 import Parsing.ListEnemy;
 
 public class PlaceMobs {
-	
-	final private int radiusSpawnMobs = 40;
-	private ListEnemy LE;
-	private Mob[] listMobs;
-	private int cptInit;
-	
-	
 
-	public PlaceMobs(Player player, String songTitle){
-		LE = DeserializationListEnemy(songTitle);
-		for(int i = 0; i < LE.lenght();i++)
-		{
-			listMobs[i] = new Mob(i, new SeekMove(player), 1);
-		}
-		cptInit = 0;
-	}
-	
-	public void placement(int angleMob)
-	{
-		listMobs[cptInit].setPositionEntity(false, angleMob, radiusSpawnMobs);
-		cptInit++;
-	}
-	
-	public ListEnemy DeserializationListEnemy(String songTitle)
+    final private int radiusSpawnMobs = 40;
+    private ListEnemy LE=null;
+    private ArrayList <Mob>listMobs=new ArrayList <Mob>();
+    private int cptInit;
+
+
+
+    public PlaceMobs(Player player, String songTitle){
+        LE = DeserializationListEnemy(songTitle);
+        for(int i = 0; i < LE.lenght();i++)
+        {
+            Mob m = new Mob(i, new SeekMove(player), 1);
+            listMobs.add(m);
+        }
+        cptInit = 0;
+    }
+
+    public void placement(int angleMob)
+    {
+        listMobs.get(cptInit).setPositionEntity(false, angleMob, radiusSpawnMobs);
+        cptInit++;
+    }
+
+    public ListEnemy DeserializationListEnemy(String songTitle)
     {
         try {
             FileInputStream fis = new FileInputStream(songTitle);
             ObjectInputStream ois= new ObjectInputStream(fis);
             try
-            {   
-                LE = (ListEnemy) ois.readObject(); 
+            {
+                LE = (ListEnemy) ois.readObject();
             } finally
-                {
+            {
                 try
                 {
                     ois.close();
                 } finally
-                    {
-                        fis.close();
-                    }
+                {
+                    fis.close();
+                }
             }
         } catch(IOException ioe) {
             ioe.printStackTrace();
@@ -63,8 +66,8 @@ public class PlaceMobs {
         }
         return null;
     }
-	
-	public Mob[] getMobsList(){
-		return listMobs;
-	}
+
+    public   ArrayList <Mob> getMobsList(){
+        return listMobs;
+    }
 }

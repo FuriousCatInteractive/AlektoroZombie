@@ -98,6 +98,11 @@ public class Main {
                     pos = Mouse.getPosition(window1);
                     System.out.println(pos.x + " " + pos.y);
                 }
+                //clic de la souris
+                if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+                    event.asMouseEvent();
+                    System.out.println("clic!!");
+                }
             }
 
             player.fire();
@@ -105,6 +110,7 @@ public class Main {
             // Draw and update viewfinder
             ViewFinder viewFinder = new ViewFinder();
             viewFinder.updateViewFinder(pos, player);
+
             window1.draw(viewFinder);
 
             // Draw and update Game entity

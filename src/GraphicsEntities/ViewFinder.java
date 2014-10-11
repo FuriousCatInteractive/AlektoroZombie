@@ -1,5 +1,6 @@
 package GraphicsEntities;
 
+import Entities.Player;
 import MoveBehavior.MathUtils;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
@@ -18,13 +19,15 @@ public class ViewFinder implements Drawable{
         viewFinder.setFillColor(Color.RED);
     }
 
-    public void updateViewFinder(Vector2i posMouse, Vector2f playerPos) {
+    public void updateViewFinder(Vector2i posMouse, Player player) {
+        Vector2f playerPos = player.getPosition();
         this.viewFinder.setPosition(playerPos);
         this.posMouse = posMouse;
         Vector2f tmpPosMouse = new Vector2f(posMouse.x, posMouse.y);
         Vector2f vectorMouse = Vector2f.sub(tmpPosMouse, playerPos);
         double angle = 2 * Math.atan(vectorMouse.y/(vectorMouse.x + Math.sqrt(Math.pow(vectorMouse.x, 2) + Math.pow(vectorMouse.y, 2))));
         viewFinder.rotate((float)(angle * (180 / Math.PI)));
+        player.setVectorViewFinder(vectorMouse);
     }
 
     @Override

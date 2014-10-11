@@ -1,8 +1,6 @@
+package Graphics;
 
-import Entities.GameBaseEntity;
-import Entities.Mob;
-import Entities.MovableEntity;
-import Entities.Player;
+import Entities.*;
 import org.jsfml.graphics.*;
 
 import java.io.IOException;
@@ -14,10 +12,10 @@ import java.util.List;
  */
 public class TextureManager {
 
-    private int[] compteurAnimation;
+    private static int[] compteurAnimation;
 
     public TextureManager(List<GameBaseEntity> entityList){
-        compteurAnimation = new int[entityList.size()];
+        compteurAnimation = new int[99999];
         for(int i=0;i<entityList.size(); i++){
             compteurAnimation[i]=0;
         }
@@ -25,7 +23,7 @@ public class TextureManager {
         mergeTextureSprite(entityList);
     }
 
-    public void updateTexture(Sprite sprite,int numero, int direction){
+    public static void updateTexture(Sprite sprite,int numero, int direction){
         IntRect rect ;
 
         if(sprite instanceof Mob) {
@@ -72,7 +70,7 @@ public class TextureManager {
     }
 
 
-    public Texture loadTexture(String imagePath) {
+    public static Texture loadTexture(String imagePath) {
 
         Texture textureSprite = new Texture();
 
@@ -94,8 +92,28 @@ public class TextureManager {
                 it.setTexture(loadTexture("rsc/img/zombie.png"));
                 it.setScale(3f,3f);
             }
+            else if(it instanceof Bullet) {
+                it.setTexture(loadTexture("rsc/img/poule.png"));
+                it.setScale(1f, 1f);
+            }
             updateTexture(it,it.getId(),1);
         }
+    }
+
+    public static void mergeTextureSprite(GameBaseEntity entityList) {
+        if(entityList instanceof Mob) {
+            entityList.setTexture(loadTexture("rsc/img/poule.png"));
+            entityList.setScale(3f,3f);
+            }
+            else if(entityList instanceof Player) {
+                entityList.setTexture(loadTexture("rsc/img/zombie.png"));
+                entityList.setScale(3f,3f);
+            }
+            else if(entityList instanceof Bullet) {
+                entityList.setTexture(loadTexture("rsc/img/poule.png"));
+                entityList.setScale(1f, 1f);
+        }
+        updateTexture(entityList,entityList.getId(),1);
     }
 
     public void updateList(List<GameBaseEntity> entityList){

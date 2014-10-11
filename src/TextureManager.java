@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class TextureManager {
 
-    private int compteurAnimation[];
+    private int[] compteurAnimation;
 
     public TextureManager(List<GameBaseEntity> entityList){
-
+        compteurAnimation = new int[entityList.size()];
         for(int i=0;i<entityList.size(); i++){
             compteurAnimation[i]=0;
         }
@@ -91,7 +91,7 @@ public class TextureManager {
                 it.setScale(2f,2f);
             }
             else if(it instanceof Player) {
-                it.setTexture(loadTexture("rsc/img/zombi.png"));
+                it.setTexture(loadTexture("rsc/img/zombie.png"));
                 it.setScale(4f,4f);
             }
         }

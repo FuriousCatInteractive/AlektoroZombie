@@ -146,7 +146,7 @@ public class Main {
                 System.out.println();
             }*/
 
-            window1.draw(test);
+            window1.draw(player);
 
             window1.display();
             window1.clear(BLACK);

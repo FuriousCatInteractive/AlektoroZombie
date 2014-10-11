@@ -96,5 +96,6 @@ public abstract class GameBaseEntity extends Sprite{
     public void setDirection(int direction) {
         this.direction = direction;
     }
+
 }
 

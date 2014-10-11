@@ -16,6 +16,7 @@ public class Bullet extends MovableEntity {
         this.id = id;
         this.setPosition(player.getPosition());
         this.setDirection(1);
+        this.setVisible(true);
     }
 
     public Vector2f getPlayerViewFinder() {

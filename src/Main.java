@@ -20,6 +20,8 @@ public class Main {
         int WINDOW_H = 700;
         int WINDOW_W = 700;
 
+        GameBaseEntity toKill = null;
+
         RenderWindow window1 = new RenderWindow();
         window1.create(new VideoMode(WINDOW_W ,WINDOW_H), "fenetre JSFML");//-1 = fullscreen
         window1.setFramerateLimit(60);
@@ -101,11 +103,9 @@ public class Main {
                 //clic de la souris
                 if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                     event.asMouseEvent();
-                    System.out.println("clic!!");
+                    player.fire();
                 }
             }
-
-            player.fire();
 
             // Draw and update viewfinder
             ViewFinder viewFinder = new ViewFinder();
@@ -115,19 +115,28 @@ public class Main {
 
             // Draw and update Game entity
             for(GameBaseEntity it : manager.getEntityList()) {
-                if(!(it instanceof Player)) {
+                if(it.getPosition().x < 0 || it.getPosition().y < 0 || it.getPosition().x > window1.getSize().x || it.getPosition().y > window1.getSize().y) {
+                    it.setVisible(false);
+                }
+                if (!(it instanceof Player)) {
                     try {
                         ((MovableEntity) it).moveEntity();
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                 }
-                if(it instanceof Player) {
+                if (it instanceof Player) {
                     player.updateDirection(pos, window1.getSize());
                 }
                 texManager.updateTexture(it, it.getId(), it.getDirection());
-                window1.draw(it);
+                 window1.draw(it);
+            }
+
+            for(int i = 0 ; i<manager.getEntityList().size() ; i++) {
+                if(manager.getEntityList().get(i) instanceof Bullet && !manager.getEntityList().get(i).isVisible()) {
+                    System.out.println("Delete bullet");
+                    manager.getEntityList().remove(i);
+                }
             }
 
             window1.display();

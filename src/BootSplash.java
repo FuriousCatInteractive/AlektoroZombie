@@ -86,7 +86,7 @@ public class BootSplash extends Sprite{
         }
         else if(ok2==true)
         {
-            this.startMusic("res/Meow.ogg");
+            this.startMusic("rsc/sound/Meow.ogg");
             ok2=false;
         }
     }

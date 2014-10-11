@@ -21,7 +21,7 @@ public abstract class MovableEntity extends GameBaseEntity {
         this.maxSpeed = maxSpeed;
     }
 
-    public void move() throws Exception{
+    public void moveEntity() throws Exception{
         if(moveStrategy == null) {
             throw new Exception(this.getClass().getName() + ": Have not move behavior");
         }

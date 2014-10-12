@@ -1,9 +1,9 @@
 package Screens;
 
 import static org.jsfml.graphics.Color.BLACK;
-import static org.jsfml.graphics.Color.WHITE;
 
-
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -11,7 +11,7 @@ import Entities.*;
 
 import Graphics.TextureManager;
 
-import org.jsfml.graphics.RenderWindow;
+import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -29,28 +29,50 @@ public class GameLoop extends cScreen {
 
     public int Run(RenderWindow App) {
 
+        //background
+        Sprite background = new Sprite();
+        try {
+            Texture maTexture = new Texture();
+            maTexture.loadFromFile(Paths.get("rsc/img/background.jpg")); // on charge la texture qui se trouve dans notre dossier assets
+            background.setTexture(maTexture); // on applique la texture à notre sprite
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //Vars pour affichage des points de vie du joueur
+        Text playerHealthStatus = new Text();
+        Font Font = new Font();
+        int taille_Font = 15;
+        try {
+            Font.loadFromFile(Paths.get("rsc/font/Frank Knows.ttf"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return (-1);
+        }
+
         Vector2i pos = new Vector2i(0, 0);
 
         EntityManager manager = EntityManager.getIntance();
 
         PlacePlayer PlayerSpawnManager = new PlacePlayer();
-        manager.addEntity(Player.getInstance());
+        EntityManager.addEntity(Player.getInstance());
 
         PlaceMobs MobsSpawnManager = new PlaceMobs(Player.getInstance(), "rsc/sound/Zelda3.serial");
         ArrayList<Mob> listeMobs = MobsSpawnManager.getMobsList();
         for (int i=0; i<listeMobs.size(); i++){
             try {
-                manager.addEntity(listeMobs.get(i));
+                EntityManager.addEntity(listeMobs.get(i));
             }
             catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
 
-        TextureManager texManager= new TextureManager(manager.getEntityList());
+        TextureManager texManager= new TextureManager(EntityManager.getEntityList());
 
         try {
-            PlayerSpawnManager.placement((Player) EntityManager.getEntity("Player", 0), App);
+            PlayerSpawnManager.placement(EntityManager.getEntity("Player", 0), App);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -93,7 +115,7 @@ public class GameLoop extends cScreen {
             App.draw(viewFinder);
 
             // Draw and update Game entity
-            for(GameBaseEntity it : manager.getEntityList()) {
+            for(GameBaseEntity it : EntityManager.getEntityList()) {
                 if(it.getPosition().x < 0 || it.getPosition().y < 0 || it.getPosition().x > App.getSize().x || it.getPosition().y > App.getSize().y) {
                     it.setVisible(false);
                 }
@@ -105,31 +127,40 @@ public class GameLoop extends cScreen {
                         System.out.println(e.getMessage());
                     }
                 }
+
                 if(it instanceof Player) {
                     Player.getInstance().updateDirection(pos, App.getSize());
                 }
                 if(it instanceof Bullet) {
-                    ((Bullet) it).detectCollision();
+                    it.detectCollision();
                 }
                 else if(it instanceof Player) {
-                    ((Player)it).detectCollision();
+                    it.detectCollision();
                 }
-                texManager.updateTexture(it, it.getId(), it.getDirection());
+                TextureManager.updateTexture(it, it.getId(), it.getDirection());
                 App.draw(it);
             }
 
-            for(int i = 0 ; i<manager.getEntityList().size() ; i++) {
-                if(!manager.getEntityList().get(i).isVisible()) {
+
+            //Affichage des points de vie restants
+            playerHealthStatus.setFont(Font);
+            playerHealthStatus.setCharacterSize((int)(1.50*taille_Font));
+            playerHealthStatus.setString("Points de vie restants : "+Player.getInstance().getHealthPoints());
+            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width -10, App.getSize().y - playerHealthStatus.getLocalBounds().height - 10);
+            App.draw(playerHealthStatus);
+
+            for(int i = 0 ; i<EntityManager.getEntityList().size() ; i++) {
+                if(!EntityManager.getEntityList().get(i).isVisible()) {
                     System.out.println("Delete bullet");
-                    manager.getEntityList().remove(i);
+                    EntityManager.getEntityList().remove(i);
                 }
-                else if(!manager.getEntityList().get(i).isAlive() && manager.getEntityList().get(i) instanceof Mob) {
-                    ((Mob) manager.getEntityList().get(i)).decDieAnim();
+                else if(!EntityManager.getEntityList().get(i).isAlive() && EntityManager.getEntityList().get(i) instanceof Mob) {
+                    ((Mob) EntityManager.getEntityList().get(i)).decDieAnim();
                 }
             }
 
             App.display();
-            App.clear(BLACK);
+            App.draw(background);
         }
         return -1;//exit
     }

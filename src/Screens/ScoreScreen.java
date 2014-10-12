@@ -23,6 +23,9 @@ public class ScoreScreen extends cScreen {
         Text scoreLabel = new Text();
         Text numberChickenKill = new Text();
         Text score = new Text();
+        Text scoreLoseLabel = new Text();
+        Text scoreLose = new Text();
+        Text bottomText = new Text();
         Font font = new Font();
 
         try {
@@ -33,28 +36,40 @@ public class ScoreScreen extends cScreen {
         }
         numberChickenKillLabel.setFont(font);
         numberChickenKillLabel.setCharacterSize(50);
-        numberChickenKillLabel.setString("Number of chicken kill: ");
-        numberChickenKillLabel.setPosition(App.getSize().x / 2 - numberChickenKillLabel.getLocalBounds().width / 2, App.getSize().y / 4);
+        numberChickenKillLabel.setString("Number of chicken killed: ");
+        numberChickenKillLabel.setPosition(App.getSize().x / 2 - numberChickenKillLabel.getLocalBounds().width / 2, (App.getSize().y / 4)-100);
 
         numberChickenKill.setFont(font);
         numberChickenKill.setCharacterSize(50);
         numberChickenKill.setString("10000");
-        numberChickenKill.setPosition(App.getSize().x / 2 - numberChickenKillLabel.getLocalBounds().width / 2, (App.getSize().y / 4) + 50);
+        numberChickenKill.setPosition(App.getSize().x / 2 - numberChickenKill.getLocalBounds().width / 2, App.getSize().y / 4 -50);
+
+        scoreLoseLabel.setFont(font);
+        scoreLoseLabel.setCharacterSize(50);
+        scoreLoseLabel.setString("Lost points: ");
+        scoreLoseLabel.setPosition(App.getSize().x/2-scoreLoseLabel.getLocalBounds().width/2, ((App.getSize().y/4)*2)-100);
+
+        scoreLose.setFont(font);
+        scoreLose.setCharacterSize(50);
+        scoreLose.setString("-100");
+        scoreLose.setPosition(App.getSize().x/2-scoreLose.getLocalBounds().width/2, (App.getSize().y/4)*2-50);
 
         scoreLabel.setFont(font);
         scoreLabel.setCharacterSize(50);
         scoreLabel.setString("Score: ");
-        scoreLabel.setPosition( App.getSize().x/2-scoreLabel.getLocalBounds().width/2, (App.getSize().y/4)*2);
+        scoreLabel.setPosition( App.getSize().x/2-scoreLabel.getLocalBounds().width/2, ((App.getSize().y/4)*3)-100);
 
         score.setFont(font);
         score.setCharacterSize(50);
         score.setString("1000000");
-        score.setPosition(App.getSize().x/2-scoreLabel.getLocalBounds().width/2, (App.getSize().y/4)*2);
+        score.setPosition(App.getSize().x/2-score.getLocalBounds().width/2, (App.getSize().y/4)*3-50);
 
-        long debut_bootsplash = System.currentTimeMillis();
-        int duree = 4000;
+        bottomText.setFont(font);
+        bottomText.setCharacterSize((int)(0.50*50));
+        bottomText.setString("Appuyez sur une touche");
+        bottomText.setPosition( App.getSize().x/2-bottomText.getLocalBounds().width/2, App.getSize().y-bottomText.getLocalBounds().height-20);
 
-        while (System.currentTimeMillis() - debut_bootsplash < duree && Running) {
+        while (Running) {
             //Verifying events
             for (Event event : App.pollEvents()) {
                 {
@@ -73,10 +88,19 @@ public class ScoreScreen extends cScreen {
                             return 1;
                         }
                     }
+
+                    if(event.type == Event.Type.MOUSE_BUTTON_RELEASED) {
+                        return 1;
+                    }
                 }
             }
             App.draw(scoreLabel);
             App.draw(numberChickenKillLabel);
+            App.draw(score);
+            App.draw(numberChickenKill);
+            App.draw(scoreLoseLabel);
+            App.draw(scoreLose);
+            App.draw(bottomText);
             App.display();
 
             //Clearing screen

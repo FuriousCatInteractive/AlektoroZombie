@@ -13,9 +13,7 @@ import Entities.*;
 
 import Graphics.TextureManager;
 
-import org.jsfml.graphics.Font;
-import org.jsfml.graphics.RenderWindow;
-import org.jsfml.graphics.Text;
+import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -32,6 +30,17 @@ public class GameLoop extends cScreen {
 
 
     public int Run(RenderWindow App) {
+
+        //background
+        Sprite background = new Sprite();
+        try {
+            Texture maTexture = new Texture();
+            maTexture.loadFromFile(Paths.get("rsc/img/background.jpg")); // on charge la texture qui se trouve dans notre dossier assets
+            background.setTexture(maTexture); // on applique la texture à notre sprite
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         //Vars pour affichage des points de vie du joueur
         Text playerHealthStatus = new Text();
@@ -153,7 +162,7 @@ public class GameLoop extends cScreen {
             }
 
             App.display();
-            App.clear(BLACK);
+            App.draw(background);
         }
         return -1;//exit
     }

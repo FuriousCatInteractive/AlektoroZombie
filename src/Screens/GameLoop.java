@@ -184,14 +184,22 @@ public class GameLoop extends cScreen {
 
 
             try {
+                boolean win = true;
                 if (((Player) EntityManager.getEntity("Player", 0)).getHealthPoints() <= 0) {
                     ((Player) EntityManager.getEntity("Player", 0)).reset();
                     EntityManager.getEntityList().clear();
                     return 4;
                 }
-                else if (listeMobs.isEmpty()) {
+                else {
+                    for(GameBaseEntity it : EntityManager.getEntityList()) {
+                        if(it instanceof Mob && it.isVisible() == true) {
+                            win = false;
+                        }
+                    }
                     //victoire
-                    return 5;
+                    if(win == true) {
+                        return 5;
+                    }
                 }
             }
             catch (Exception e) {

@@ -52,7 +52,7 @@ public class GameOver extends cScreen {
         App.display();
         long current_time;
         try {
-            Thread.sleep(800);                 //1000 milliseconds is one second.
+            Thread.sleep(1300);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }

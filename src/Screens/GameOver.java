@@ -75,7 +75,7 @@ public class GameOver extends cScreen {
                             return (-1);
                         else {
 
-                            return 1;
+                            return 6;
                         }
                     }
                 }

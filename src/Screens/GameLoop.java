@@ -127,6 +127,7 @@ public class GameLoop extends cScreen {
                         System.out.println(e.getMessage());
                     }
                 }
+
                 if(it instanceof Player) {
                     Player.getInstance().updateDirection(pos, App.getSize());
                 }

@@ -30,7 +30,7 @@ public abstract class GameBaseEntity extends Sprite{
         this.angle = 0;
         this.radius = 0;
         this.isAlive = true;
-        this.isVisible = false;
+        this.isVisible = true;
         this.direction = 1;
     }
 
@@ -95,6 +95,18 @@ public abstract class GameBaseEntity extends Sprite{
 
     public void setDirection(int direction) {
         this.direction = direction;
+    }
+
+    public abstract void touch();
+
+    public void detectCollision() {
+        for(int i=0; i<EntityManager.getEntityList().size(); ++i) {
+            if(EntityManager.getEntityList().get(i) instanceof GameBaseEntity) {
+                if(this.getGlobalBounds().intersection(EntityManager.getEntityList().get(i).getGlobalBounds()) != null) {
+                    touch();
+                }
+            }
+        }
     }
 
 }

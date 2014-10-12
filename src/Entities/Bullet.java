@@ -26,4 +26,21 @@ public class Bullet extends MovableEntity {
     public void setPlayerViewFinder(Vector2f vector) {
         this.playerViewFinder = vector;
     }
+
+    @Override
+    public void touch() {
+        this.setVisible(false);
+    }
+
+    @Override
+    public void detectCollision() {
+        for(int i=0; i<EntityManager.getEntityList().size(); ++i) {
+            if(EntityManager.getEntityList().get(i) instanceof Mob) {
+                if(this.getGlobalBounds().intersection(EntityManager.getEntityList().get(i).getGlobalBounds()) != null) {
+                    touch();
+                    EntityManager.getEntityList().get(i).touch();
+                }
+            }
+        }
+    }
 }

@@ -93,6 +93,9 @@ public class GameLoop extends cScreen {
 
             // Draw and update Game entity
             for(GameBaseEntity it : manager.getEntityList()) {
+                if(it.getPosition().x < 0 || it.getPosition().y < 0 || it.getPosition().x > App.getSize().x || it.getPosition().y > App.getSize().y) {
+                    it.setVisible(false);
+                }
                 if(!(it instanceof Player)) {
                     try {
                         ((MovableEntity) it).moveEntity();
@@ -104,8 +107,18 @@ public class GameLoop extends cScreen {
                 if(it instanceof Player) {
                     Player.getInstance().updateDirection(pos, App.getSize());
                 }
+                if(it instanceof Bullet) {
+                    ((Bullet) it).detectCollision();
+                }
                 texManager.updateTexture(it, it.getId(), it.getDirection());
                 App.draw(it);
+            }
+
+            for(int i = 0 ; i<manager.getEntityList().size() ; i++) {
+                if(!manager.getEntityList().get(i).isVisible()) {
+                    System.out.println("Delete bullet");
+                    manager.getEntityList().remove(i);
+                }
             }
 
             App.display();

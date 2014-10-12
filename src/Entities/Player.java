@@ -57,6 +57,11 @@ public class Player extends MovableEntity{
         ++bulletId;
     }
 
+    @Override
+    public void touch() {
+
+    }
+
     public Vector2f getVectorViewFinder() {
         return vectorViewFinder;
     }

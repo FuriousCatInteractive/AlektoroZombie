@@ -62,6 +62,8 @@ public class Player extends MovableEntity{
     @Override
     public void touch() {
         --healthPoints;
+        if(healthPoints<0)
+            healthPoints=0;
     }
 
     @Override

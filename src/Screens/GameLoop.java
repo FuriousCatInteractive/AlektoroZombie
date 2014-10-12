@@ -1,6 +1,7 @@
 package Screens;
 
 import static org.jsfml.graphics.Color.BLACK;
+import static org.jsfml.graphics.Color.WHITE;
 
 
 import java.util.ArrayList;
@@ -118,6 +119,9 @@ public class GameLoop extends cScreen {
                 if(!manager.getEntityList().get(i).isVisible()) {
                     System.out.println("Delete bullet");
                     manager.getEntityList().remove(i);
+                }
+                else if(!manager.getEntityList().get(i).isAlive() && manager.getEntityList().get(i) instanceof Mob) {
+                    ((Mob) manager.getEntityList().get(i)).decDieAnim();
                 }
             }
 

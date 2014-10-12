@@ -116,6 +116,11 @@ public class TextureManager {
         updateTexture(entityList,entityList.getId(),1);
     }
 
+    public static void loadImageOnSprite(GameBaseEntity entity, String path, float scaleX, float scaleY) {
+        entity.setTexture(loadTexture(path));
+        entity.setScale(scaleX, scaleY);
+    }
+
     public void updateList(List<GameBaseEntity> entityList){
         for(GameBaseEntity it: entityList){
             updateTexture(it, it.getId(),it.getDirection());

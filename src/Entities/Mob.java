@@ -1,5 +1,6 @@
 package Entities;
 
+import Graphics.TextureManager;
 import MoveBehavior.MoveBehavior;
 
 /**
@@ -8,16 +9,27 @@ import MoveBehavior.MoveBehavior;
 public class Mob extends MovableEntity{
 
 	private long spawnTime;
+    private int dieAnim;
+
+    public void decDieAnim() {
+        --dieAnim;
+        if(dieAnim <=0) {
+            this.setVisible(false);
+        }
+    }
 
     @Override
     public void touch() {
-        this.setVisible(false);
+        this.moveStrategy = null;
+        this.setAlive(false);
+        TextureManager.loadImageOnSprite(this, "rsc/img/blood.png", 2f, 2f);
     }
 
     public Mob(int id, MoveBehavior moveStrategy, int maxSpeed) {
         super(moveStrategy, maxSpeed);
         this.id = id;
         this.setPosition(0,0);
+        this.dieAnim = 30;
     }
  
     public Mob(int id, MoveBehavior moveStrategy, int maxSpeed, boolean cartesien, int xOrAngle, int yOrRadius, long time) {

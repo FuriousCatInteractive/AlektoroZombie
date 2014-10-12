@@ -121,7 +121,7 @@ public class SelectMusic extends cScreen{
                         event.asKeyEvent();
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
-                            return  -1;
+                            return 1;
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)){
                             menu++;
@@ -139,11 +139,14 @@ public class SelectMusic extends cScreen{
                         if (Keyboard.isKeyPressed(Keyboard.Key.RETURN)) {
                             if (menu == 0) {
                                sound.stop();
-                                return (2);
-                            } else {
+                                return (3);
+                            } else if (menu == 1) {
                                 //Let's get work...
                                 sound.stop();
-                                return (-1);
+                                return (3);}
+                            else if (menu == 2){
+                                sound.stop();
+                                return 1;
                             }
                         }
                     }

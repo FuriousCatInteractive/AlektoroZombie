@@ -67,7 +67,7 @@ public class GameLoop extends cScreen {
                 if (event.type == Event.Type.CLOSED) {
                     // Si l'utilisateur clique sur la croix rouge alors on ferme
                     // la fenêtre
-                    return 2;
+                    return (-1);
                 }
 
                 if (event.type == Event.Type.MOUSE_MOVED) {

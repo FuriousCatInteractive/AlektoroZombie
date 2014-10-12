@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 /**
  * Created by coco on 14-10-11.
  */
-public class Menu extends cScreen{
+public class SelectMusic extends cScreen{
     private int alpha_max;
     private int alpha_div = 1;
     private boolean playing;
@@ -123,7 +123,7 @@ public class Menu extends cScreen{
                         }
                         else if(Menu2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 1;
-                           // System.out.println("menu0");
+                            // System.out.println("menu0");
                         }
                     }
 

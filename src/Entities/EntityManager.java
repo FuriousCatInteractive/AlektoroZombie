@@ -1,11 +1,10 @@
 package Entities;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
+ * Package ${PACKAGE_NAME}
  * Created by steven on 10/11/14.
  */
 public class EntityManager {
@@ -34,12 +33,7 @@ public class EntityManager {
                 return it;
             }
         }
-        throw new Exception("There a not this entity in the list");
-    }
-
-    public static void deleteEntity(GameBaseEntity entity) {
-        System.out.println(entity.getClass().getName() + ": is deleting");
-        entityList.remove(entity);
+        throw new Exception("This entity doesn't exist");
     }
 
     public static List<GameBaseEntity> getEntityList() {

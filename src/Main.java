@@ -1,8 +1,5 @@
 
-import Screens.BootSplash;
-import Screens.GameLoop;
-import Screens.Menu;
-import Screens.cScreen;
+import Screens.*;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderWindow;
@@ -29,11 +26,12 @@ public class Main {
         System.out.println("top: " + rectWindow1.top + " left: " + rectWindow1.left + " width: " + rectWindow1.height);
 
         //Applications variables
-        cScreen[] Screens = new cScreen[3];
+        cScreen[] Screens = new cScreen[4];
         int screen = 0;
         Screens[0] = new BootSplash();
         Screens[1] = new Menu();
-        Screens[2] = new GameLoop();
+        Screens[2] = new SelectMusic();
+        Screens[3] = new GameLoop();
 
         while (screen >= 0) {
             screen = Screens[screen].Run(window1);

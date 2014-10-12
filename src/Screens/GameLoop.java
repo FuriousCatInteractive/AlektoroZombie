@@ -111,6 +111,9 @@ public class GameLoop extends cScreen {
                 if(it instanceof Bullet) {
                     ((Bullet) it).detectCollision();
                 }
+                else if(it instanceof Player) {
+                    ((Player)it).detectCollision();
+                }
                 texManager.updateTexture(it, it.getId(), it.getDirection());
                 App.draw(it);
             }

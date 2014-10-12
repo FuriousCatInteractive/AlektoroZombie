@@ -64,9 +64,9 @@ public class BootSplash extends cScreen{
         boolean Running = true;
         BootSplashInit(App);
         long debut_bootsplash = System.currentTimeMillis();
-        int duree=6;
+        int duree=5000;
 
-        while (System.currentTimeMillis()-debut_bootsplash<duree*1000 && Running)
+        while (System.currentTimeMillis()-debut_bootsplash<duree && Running)
         {
             //Verifying events
             for (Event event : App.pollEvents()) {
@@ -83,10 +83,11 @@ public class BootSplash extends cScreen{
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
                             return (-1);
+                        else
+                        {
 
-                        //to skip bootsplash
-                        if (Keyboard.isKeyPressed(Keyboard.Key.SPACE))
-                            return (1);
+                            return 1;
+                        }
                     }
                 }
             }

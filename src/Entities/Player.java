@@ -10,6 +10,7 @@ import org.jsfml.system.Vector2i;
 public class Player extends MovableEntity{
     private Vector2f vectorViewFinder;
     private static int bulletId = 0;
+    private int healthPoints;
 
     static Player singleton = null;
 
@@ -18,6 +19,7 @@ public class Player extends MovableEntity{
         id = 0;
         this.setPosition(50, 50);
         this.vectorViewFinder = new Vector2f(0,0);
+        healthPoints = 3;
     }
 
     public final static Player getInstance() {
@@ -59,7 +61,19 @@ public class Player extends MovableEntity{
 
     @Override
     public void touch() {
+        --healthPoints;
+    }
 
+    @Override
+    public void detectCollision() {
+        for(int i=0; i<EntityManager.getEntityList().size(); ++i) {
+            if(EntityManager.getEntityList().get(i) instanceof Mob) {
+                if(this.getGlobalBounds().intersection(EntityManager.getEntityList().get(i).getGlobalBounds()) != null) {
+                    touch();
+                    EntityManager.getEntityList().get(i).touch();
+                }
+            }
+        }
     }
 
     public Vector2f getVectorViewFinder() {

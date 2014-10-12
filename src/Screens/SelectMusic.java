@@ -3,7 +3,6 @@ package Screens;
 import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 import org.jsfml.graphics.*;
-import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -24,47 +23,46 @@ public class SelectMusic extends cScreen{
     public int Run(RenderWindow App){
 
         boolean Running = true;
-        Texture Texture = new Texture();
-        Sprite Sprite = new Sprite();
-        Sprite background = new Sprite();
         int alpha = 0;
         Font Font = new Font();
-
         Text Menu1 = new Text();
         Text Menu2 = new Text();
-        Text Menu3 = new Text();
+        Text retour = new Text();
         Text Titre = new Text();
+
 
         int menu = 0;
 
 
+        try {
+            Font.loadFromFile(Paths.get("rsc/font/Frank Knows.ttf"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return (-1);
+        }
 
-        int taille_Font = 60;
+        int taille_Font = 50;
 
         Titre.setFont(Font);
-        Titre.setCharacterSize((int)(1.50*taille_Font));
-        Titre.setString("Sélection des musiques");
+        Titre.setCharacterSize((int)(1.40*taille_Font));
+        Titre.setString("Selection des musiques ");
         Titre.setPosition( App.getSize().x/2-Titre.getLocalBounds().width/2, 20);
 
         Menu1.setFont(Font);
         Menu1.setCharacterSize(taille_Font);
         Menu1.setString("Musique #1");
-        Menu1.setPosition( App.getSize().x/2-Menu1.getLocalBounds().width/2, App.getSize().y/2+70);
+        Menu1.setPosition( App.getSize().x/2-Menu1.getLocalBounds().width/2, App.getSize().y/3);
 
         Menu2.setFont(Font);
         Menu2.setCharacterSize(taille_Font);
         Menu2.setString("Musique #2");
-        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
+        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/3+1*taille_Font+20);
 
-        Menu3.setFont(Font);
-        Menu3.setCharacterSize(taille_Font);
-        Menu3.setString("Continue");
-        Menu3.setPosition(  App.getSize().x/2-Menu3.getLocalBounds().width/2, App.getSize().y/2+4*taille_Font);
+        retour.setFont(Font);
+        retour.setCharacterSize(taille_Font);
+        retour.setString("Retour");
+        retour.setPosition(  App.getSize().x/2-retour.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
 
-        /*if (playing)
-        {
-            alpha = alpha_max;
-        }*/
 
         Vector2i pos = new Vector2i(0,0);
         startMusic("rsc/sound/king.it.ogg");
@@ -80,7 +78,6 @@ public class SelectMusic extends cScreen{
                         return (-1);
                     }
 
-
                     if (event.type == Event.Type.MOUSE_MOVED) {
                         event.asMouseEvent();
                         pos = Mouse.getPosition(App);
@@ -94,21 +91,28 @@ public class SelectMusic extends cScreen{
                             menu = 1;
                             // System.out.println("menu0");
                         }
+                        else if(retour.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            menu = 2;
+                            // System.out.println("menu0");
+                        }
                     }
 
                     //clic de la souris
                     if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                         event.asMouseEvent();
                         if (menu == 0) {
-                            //Let's get play !
-                            playing = true;
                             sound.stop();
-                            return (2);
-                        } else {
+                            return (3);
+                        }
+                        else if (menu == 1){
                             //Let's get work...
                             sound.stop();
-                            return (-1);
+                            return (3);
                         }
+                        else if (menu == 2){
+                            return 1;
+                        }
+
                     }
 
                     //Key pressed
@@ -119,20 +123,22 @@ public class SelectMusic extends cScreen{
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
                             return  -1;
 
-                        if (Keyboard.isKeyPressed(Keyboard.Key.UP)){
-                            menu = 0;
+                        if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)){
+                            menu++;
+                            if(menu>2)
+                                menu = 0;
                         }
 
-                        if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)) {
-                            menu = 1;
+                        if (Keyboard.isKeyPressed(Keyboard.Key.UP)) {
+                            menu--;
+                            if(menu<0)
+                                menu = 2;
                         }
 
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.RETURN)) {
                             if (menu == 0) {
-                                //Let's get play !
-                                playing = true;
-                                sound.stop();
+                               sound.stop();
                                 return (2);
                             } else {
                                 //Let's get work...
@@ -143,43 +149,32 @@ public class SelectMusic extends cScreen{
                     }
                 }
             }
-            //When getting at alpha_max, we stop modifying the sprite
-           /* if (alpha<alpha_max)
-            {
-                alpha++;
-            }
-            Sprite.setColor(new Color(255, 255, 255, alpha / alpha_div));*/
+
             if (menu == 0)
             {
-                Menu1.setColor(new Color(255, 0, 0, 255));
-                Menu2.setColor(new Color(255, 255, 255, 255));
-                Menu3.setColor(new Color(255, 0, 0, 255));
+                Menu1.setColor(Color.RED);
+                Menu2.setColor(Color.WHITE);
+                retour.setColor(Color.WHITE);
             }
-            else
+            else if (menu == 1)
             {
-                Menu1.setColor(new Color(255, 255, 255, 255));
-                Menu2.setColor(new Color(255, 0, 0, 255));
-                Menu3.setColor(new Color(255, 255, 255, 255));
+                Menu1.setColor(Color.WHITE);
+                Menu2.setColor(Color.RED);
+                retour.setColor(Color.WHITE);
+            }
+            else if (menu == 2)
+            {
+                Menu1.setColor(Color.WHITE);
+                Menu2.setColor(Color.WHITE);
+                retour.setColor(Color.RED);
             }
 
-            //Clearing screen
+
             App.clear();
-            //Drawing
-            //App.draw(Sprite);
             App.draw(Titre);
-            if (alpha == alpha_max)
-            {
-                if (playing)
-                {
-                    App.draw(Menu3);
-                }
-                else
-                {
-                    App.draw(Menu1);
-                }
-                App.draw(Menu2);
-            }
-
+            App.draw(retour);
+            App.draw(Menu1);
+            App.draw(Menu2);
             App.display();
         }
 

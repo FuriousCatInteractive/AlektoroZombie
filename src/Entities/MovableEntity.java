@@ -23,12 +23,12 @@ public abstract class MovableEntity extends GameBaseEntity {
     }
 
     public void moveEntity() throws Exception{
-        if(moveStrategy == null) {
-            throw new Exception(this.getClass().getName() + ": Have not move behavior");
-        }
-        else {
+        if(moveStrategy != null) {
             Vector2f velocity = moveStrategy.move(this);
             this.setPosition(Vector2f.add(this.getPosition(), velocity));
+        }
+        else {
+            throw new Exception(this.getClass().getName() + ": Have not move behavior");
         }
     }
 

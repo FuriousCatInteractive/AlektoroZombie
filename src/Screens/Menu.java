@@ -91,6 +91,8 @@ public class Menu extends cScreen{
         startMusic("rsc/sound/son_poules_menus.wav");
         startMusic("rsc/sound/king.it.ogg");
 
+        Sprite viseur = loadViseur(App);
+
         while (Running)
         {
             //Verifying events
@@ -178,6 +180,9 @@ public class Menu extends cScreen{
                 Menu2.setColor(new Color(255, 0, 0, 255));
                 Menu3.setColor(new Color(255, 255, 255, 255));
             }
+            Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
+            viseur.setPosition(posViseur);
+
 
 
             App.clear();
@@ -186,6 +191,9 @@ public class Menu extends cScreen{
             App.draw(Menu2);
             App.draw(background);
             App.draw(bottomText);
+
+            App.draw(viseur);
+
             App.display();
         }
 
@@ -211,5 +219,7 @@ public class Menu extends cScreen{
         sound.play();
         //sound.setVolume(40.0f);
     }
+
+
 
 }

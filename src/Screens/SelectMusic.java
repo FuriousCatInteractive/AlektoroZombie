@@ -3,6 +3,7 @@ package Screens;
 import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 import org.jsfml.graphics.*;
+import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -67,6 +68,8 @@ public class SelectMusic extends cScreen{
         Vector2i pos = new Vector2i(0,0);
         startMusic("rsc/sound/son_poules_menus.wav");
         startMusic("rsc/sound/king.it.ogg");
+
+        Sprite viseur = loadViseur(App);
 
         while (Running)
         {
@@ -176,10 +179,17 @@ public class SelectMusic extends cScreen{
 
 
             App.clear();
+
             App.draw(Titre);
             App.draw(retour);
             App.draw(Menu1);
             App.draw(Menu2);
+
+            Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
+            viseur.setPosition(posViseur);
+            App.draw(viseur);
+
+
             App.display();
         }
 

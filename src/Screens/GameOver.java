@@ -84,20 +84,20 @@ public class GameOver extends cScreen {
             App.draw(gameOver);
              current_time = System.currentTimeMillis();
 
-            if(current_time -debut_bootsplash < 1100)
+            if(current_time -debut_bootsplash < 800)
             {
                 dramatic.setOrigin(dramatic.getGlobalBounds().width/2,dramatic.getGlobalBounds().height/2 );
                 dramatic.setPosition(App.getSize().x/2,App.getSize().y/2);
                 App.draw(dramatic);
             }
-            else if(current_time -debut_bootsplash >= 1100 && current_time -debut_bootsplash <= 1600)
+            else if(current_time -debut_bootsplash >= 800 && current_time -debut_bootsplash <= 1300)
             {
                 dramatic.setOrigin(dramatic.getGlobalBounds().width/6,dramatic.getGlobalBounds().height/2  );
                 dramatic.setPosition(App.getSize().x/2,(int)(11*App.getSize().y/10));
                 dramatic.setScale(2.4f,2.4f);
                 App.draw(dramatic);
             }
-            else if(current_time -debut_bootsplash > 1600 && current_time -debut_bootsplash <= 3700)
+            else if(current_time -debut_bootsplash > 1300 && current_time -debut_bootsplash <= 3700)
             {
                 dramatic.setOrigin(dramatic.getGlobalBounds().width/12,dramatic.getGlobalBounds().height/2  );
                 dramatic.setPosition(App.getSize().x/2,25*App.getSize().y/10);

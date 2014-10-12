@@ -37,6 +37,8 @@ public class GameLoop extends cScreen {
 
         startMusic("rsc/sound/son_poules_menus.wav");
 
+        Sprite viseur = loadViseur(App);
+
         CircleShape circle = new CircleShape(200);
         circle.setOutlineColor(Color.GREEN);
         circle.setFillColor(Color.TRANSPARENT);
@@ -102,6 +104,8 @@ public class GameLoop extends cScreen {
 
         startMusic("rsc/sound/ZeldaDance.ogg");
         while (App.isOpen()){
+
+
             Mob tempMonstre;
             long currentTime=gameClock.getElapsedTime().asMilliseconds();
             if (currentTime<0) currentTime=0;
@@ -131,6 +135,7 @@ public class GameLoop extends cScreen {
                     event.asMouseEvent();
                     pos = Mouse.getPosition(App);
                     System.out.println(pos.x + " " + pos.y);
+
                 }
                 //clic de la souris
                 if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
@@ -179,7 +184,7 @@ public class GameLoop extends cScreen {
                             it.getGlobalBounds().width-9,it.getGlobalBounds().height-9);
                     for(int cpt =0; cpt<circle.getPointCount();cpt++){
 
-                        if(rectMob.contains(circle.getPoint(cpt).x+posCirclex,circle.getPoint(cpt).y+posCircley)) {
+                        if(rectMob.contains(circle.getPoint(cpt).x + posCirclex, circle.getPoint(cpt).y + posCircley)) {
                             System.out.println("caca" + circle.getPoint(cpt) + "+ " + circle.getPosition());
                             intersect=true;
                         }
@@ -247,6 +252,10 @@ public class GameLoop extends cScreen {
                 System.out.println(e.getMessage());
             }
 
+            Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
+            viseur.setPosition(posViseur);
+            App.draw(viseur);
+            
             App.display();
             App.draw(background);
             App.draw(circle);

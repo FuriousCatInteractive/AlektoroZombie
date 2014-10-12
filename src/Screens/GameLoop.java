@@ -182,21 +182,22 @@ public class GameLoop extends cScreen {
                 }
             }
 
-            if(Player.getInstance().getHealthPoints() <= 0)
-            {
-                try {
-                    ((Player)EntityManager.getEntity("Player",0)).reset();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
+            try {
+                if (((Player) EntityManager.getEntity("Player", 0)).getHealthPoints() <= 0) {
+                    ((Player) EntityManager.getEntity("Player", 0)).reset();
+                    EntityManager.getEntityList().clear();
                     return 4;
-            }else if(listeMobs.isEmpty()){
-                //victoire
-                return 5;
+                }
+                else if (listeMobs.isEmpty()) {
+                    //victoire
+                    return 5;
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
-            System.out.println(Player.getInstance().getHealthPoints() );
             App.display();
             App.draw(background);
         }

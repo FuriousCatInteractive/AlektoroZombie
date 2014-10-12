@@ -1,7 +1,5 @@
 package Screens;
 
-import static org.jsfml.graphics.Color.BLACK;
-
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -25,6 +23,8 @@ import GraphicsEntities.ViewFinder;
 import PlaceEntities.PlaceMobs;
 import PlaceEntities.PlacePlayer;
 
+import static org.jsfml.graphics.Color.*;
+
 /**
  * Created by coco on 14-10-11.
  */
@@ -38,8 +38,13 @@ public class GameLoop extends cScreen {
         CircleShape circle = new CircleShape(200);
         circle.setOutlineColor(Color.GREEN);
         circle.setFillColor(Color.TRANSPARENT);
-        circle.setOutlineThickness(1);
-        circle.setOrigin(-155,-170);
+        circle.setOutlineThickness(3);
+        circle.setPosition(App.getSize().x/2-200,App.getSize().y/2-200);
+        //  circle.setOrigin(-155,-170);
+        circle.setPointCount(50);
+        float posCirclex=circle.getPosition().x;
+        float posCircley=circle.getPosition().y;
+
 
         //background
         Sprite background = new Sprite();
@@ -163,6 +168,21 @@ public class GameLoop extends cScreen {
                 else if (it instanceof Mob){
                     Vector2i posMOb = new Vector2i((int)it.getPosition().x, (int)it.getPosition().y);
                     ((Mob)(it)).updateDirection(posMOb, App.getSize());
+
+                    boolean intersect = false;
+                    FloatRect rectMob = new FloatRect(it.getGlobalBounds().left+14,it.getGlobalBounds().top+14,
+                            it.getGlobalBounds().width-14,it.getGlobalBounds().height-14);
+                    for(int cpt =0; cpt<circle.getPointCount();cpt++){
+
+                        if(rectMob.contains(circle.getPoint(cpt).x+posCirclex,circle.getPoint(cpt).y+posCircley)) {
+                            System.out.println("caca" + circle.getPoint(cpt) + "+ " + circle.getPosition());
+                            intersect=true;
+                        }
+                    }
+                    if(intersect)
+                        it.setColor(GREEN);
+                    else
+                        it.setColor(WHITE);
                 }
 
                 if(it instanceof Bullet) {

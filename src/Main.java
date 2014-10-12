@@ -27,7 +27,7 @@ public class Main {
 
         //Applications variables
         cScreen[] Screens = new cScreen[6];
-        int screen = 0;
+        int screen = 3;
         Screens[0] = new BootSplash();
         Screens[1] = new Menu();
         Screens[2] = new SelectMusic();

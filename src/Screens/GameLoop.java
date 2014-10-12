@@ -121,7 +121,7 @@ public class GameLoop extends cScreen {
 
             if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                 sound.stop();
-                return 2;
+                return 1;
             }
             // On gère les événements
             for (Event event : App.pollEvents()) {
@@ -255,7 +255,7 @@ public class GameLoop extends cScreen {
             Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
             viseur.setPosition(posViseur);
             App.draw(viseur);
-            
+
             App.display();
             App.draw(background);
             App.draw(circle);

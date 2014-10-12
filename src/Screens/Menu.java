@@ -65,10 +65,10 @@ public class Menu extends cScreen{
             return (-1);
         }
 
-        int taille_Font = 70;
+        int taille_Font = 55;
 
         Titre.setFont(Font);
-        Titre.setCharacterSize((int)(1.50*taille_Font));
+        Titre.setCharacterSize((int)(1.90*taille_Font));
         Titre.setString("AlektoroZombie ");
         Titre.setPosition( App.getSize().x/2-Titre.getLocalBounds().width/2, 20);
 
@@ -84,8 +84,14 @@ public class Menu extends cScreen{
 
         Menu2.setFont(Font);
         Menu2.setCharacterSize(taille_Font);
-        Menu2.setString("Exit");
-        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
+        Menu2.setString("Config");
+        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+(int)(2.5*taille_Font));
+
+        Menu3.setFont(Font);
+        Menu3.setCharacterSize(taille_Font);
+        Menu3.setString("Exit");
+        Menu3.setPosition(  App.getSize().x/2-Menu3.getLocalBounds().width/2, App.getSize().y/2+4*taille_Font);
+
 
         Vector2i pos = new Vector2i(0,0);
         startMusic("rsc/sound/son_poules_menus.wav");
@@ -114,21 +120,26 @@ public class Menu extends cScreen{
                         else if(Menu2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 1;
                         }
+                        else if(Menu3.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            menu = 2;
+                        }
                     }
 
                     //clic de la souris
                     if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                         event.asMouseEvent();
+                        sound.stop();
                         if (menu == 0) {
-                            //Let's get play !
-                            playing = true;
-                            sound.stop();
-                            return (2);
-                        } else {
-                            //Let's get work...
-                            sound.stop();
-                            return (-1);
+                            //game loop
+                            return (3);
                         }
+                        else if(menu == 1){
+                            //configuration
+                            return (2);
+                        }
+                        else//quitter
+                            return -1;
+
                     }
 
                     //Key pressed
@@ -139,25 +150,32 @@ public class Menu extends cScreen{
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
                             return  -1;
 
-                        if (Keyboard.isKeyPressed(Keyboard.Key.UP)){
-                            menu = 0;
+                        if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)){
+                            menu++;
+                            if(menu>2)
+                                menu = 0;
                         }
 
-                        if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)) {
-                            menu = 1;
+                        if (Keyboard.isKeyPressed(Keyboard.Key.UP)) {
+                            menu--;
+                            if(menu<0)
+                                menu = 2;
                         }
+
 
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.RETURN)) {
                             sound.stop();
                             if (menu == 0) {
-
-                                return (2);
-                            } else {
-                                //Let's get work...
-
-                                return (-1);
+                                //game loop
+                                return (3);
                             }
+                            else if(menu == 1){
+                                //configuration
+                                return (2);
+                            }
+                            else//quitter
+                                return -1;
                         }
                     }
                 }
@@ -172,13 +190,19 @@ public class Menu extends cScreen{
             {
                 Menu1.setColor(new Color(255, 0, 0, 255));
                 Menu2.setColor(new Color(255, 255, 255, 255));
-                Menu3.setColor(new Color(255, 0, 0, 255));
+                Menu3.setColor(new Color(255, 255, 255, 255));
             }
-            else
+            else if(menu == 1)
             {
                 Menu1.setColor(new Color(255, 255, 255, 255));
                 Menu2.setColor(new Color(255, 0, 0, 255));
                 Menu3.setColor(new Color(255, 255, 255, 255));
+            }
+            else if(menu == 2)
+            {
+                Menu1.setColor(new Color(255, 255, 255, 255));
+                Menu2.setColor(new Color(255, 255, 255, 255));
+                Menu3.setColor(new Color(255, 0, 0, 255));
             }
             Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
             viseur.setPosition(posViseur);
@@ -189,6 +213,7 @@ public class Menu extends cScreen{
             App.draw(Titre);
             App.draw(Menu1);
             App.draw(Menu2);
+            App.draw(Menu3);
             App.draw(background);
             App.draw(bottomText);
 

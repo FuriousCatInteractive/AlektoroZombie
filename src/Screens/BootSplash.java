@@ -86,7 +86,7 @@ public class BootSplash extends cScreen{
                         else
                         {
 
-                            return 1;
+                            return 7;
                         }
                     }
                 }
@@ -102,7 +102,7 @@ public class BootSplash extends cScreen{
 
         //Never reaching this point normally, but just in case, exit the application
         System.out.println("bootsplash finit");
-        return (1);
+        return (7);
     }
 
     public void update(Sprite cat)

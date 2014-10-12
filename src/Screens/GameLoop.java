@@ -50,6 +50,7 @@ public class GameLoop extends cScreen {
             e.printStackTrace();
             return (-1);
         }
+        Text GameOverText = new Text();
 
         Vector2i pos = new Vector2i(0, 0);
 
@@ -158,6 +159,31 @@ public class GameLoop extends cScreen {
                     ((Mob) EntityManager.getEntityList().get(i)).decDieAnim();
                 }
             }
+
+            if(Player.getInstance().getHealthPoints() <= 0)
+            {
+                //Defaite
+                //ecran Game Over
+                App.clear(BLACK);
+                //Texte de defaite
+                GameOverText.setFont(Font);
+                GameOverText.setCharacterSize((int)(2.90*taille_Font));
+                GameOverText.setString("You died ! \n Game Over");
+                GameOverText.setPosition(App.getSize().x/2 - GameOverText.getLocalBounds().width/2, App.getSize().y/2 - GameOverText.getLocalBounds().height/2);
+                App.draw(GameOverText);
+                App.display();
+                try {
+                    Thread.sleep(2000);                 //1000 milliseconds is one second.
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+
+                return 1;
+            }
+            /*else if(//fin de la musique)
+            {
+
+            }*/
 
             App.display();
             App.draw(background);

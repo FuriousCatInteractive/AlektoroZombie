@@ -69,7 +69,7 @@ public class Menu extends cScreen{
 
         Titre.setFont(Font);
         Titre.setCharacterSize((int)(1.90*taille_Font));
-        Titre.setString("AlektoroZombie ");
+        Titre.setString("AlektoroZombie");
         Titre.setPosition( App.getSize().x/2-Titre.getLocalBounds().width/2, 20);
 
         bottomText.setFont(Font);
@@ -80,17 +80,17 @@ public class Menu extends cScreen{
         Menu1.setFont(Font);
         Menu1.setCharacterSize(taille_Font);
         Menu1.setString("Play");
-        Menu1.setPosition( App.getSize().x/2-Menu1.getLocalBounds().width/2, App.getSize().y/2+70);
+        Menu1.setPosition( App.getSize().x/2-Menu1.getLocalBounds().width/2, App.getSize().y/2-50);
 
         Menu2.setFont(Font);
         Menu2.setCharacterSize(taille_Font);
         Menu2.setString("Config");
-        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+(int)(2.5*taille_Font));
+        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+(int)(0.5*taille_Font));
 
         Menu3.setFont(Font);
         Menu3.setCharacterSize(taille_Font);
         Menu3.setString("Exit");
-        Menu3.setPosition(  App.getSize().x/2-Menu3.getLocalBounds().width/2, App.getSize().y/2+4*taille_Font);
+        Menu3.setPosition(  App.getSize().x/2-Menu3.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
 
 
         Vector2i pos = new Vector2i(0,0);
@@ -214,7 +214,7 @@ public class Menu extends cScreen{
             App.draw(Menu1);
             App.draw(Menu2);
             App.draw(Menu3);
-            App.draw(background);
+            //App.draw(background);
             App.draw(bottomText);
 
             App.draw(viseur);

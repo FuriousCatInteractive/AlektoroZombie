@@ -1,8 +1,16 @@
 package Entities;
 
 import Graphics.TextureManager;
+import org.jsfml.audio.Sound;
+import org.jsfml.audio.SoundBuffer;
+import org.jsfml.graphics.Color;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
+
+import java.io.IOException;
+import java.nio.file.Paths;
+
+import static org.jsfml.graphics.Color.WHITE;
 
 /**
  * Created by steven on 10/10/14.
@@ -58,10 +66,33 @@ public class Player extends MovableEntity{
 
     @Override
     public void touch() {
+        Sound s=startMusic("rsc/sound/lancer_pierre.wav");
+        s.setVolume(400f);
         --healthPoints;
         if(healthPoints<0)
             healthPoints=0;
     }
+    private Sound startMusic(String path)
+    {
+        SoundBuffer soundBuffer = new SoundBuffer();
+        try {
+            soundBuffer.loadFromFile(Paths.get(path));
+            System.out.println("Sound duration: " + soundBuffer.getDuration().asSeconds() + " seconds");
+        } catch(IOException ex) {
+            //Something went wrong
+            System.err.println("Failed to load the sound:");
+            ex.printStackTrace();
+        }
+
+        //Create a sound and set its buffer
+        Sound sound = new Sound();
+        sound.setBuffer(soundBuffer);
+        sound.play();
+
+        return sound;
+    }
+
+
 
    
 

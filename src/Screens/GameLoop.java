@@ -167,6 +167,7 @@ public class GameLoop extends cScreen {
                 }
                 if(!(it instanceof Player)) {
                     try {
+
                         ((MovableEntity) it).moveEntity();
                     }
                     catch (Exception e) {
@@ -217,9 +218,9 @@ public class GameLoop extends cScreen {
             App.draw(playerHealthStatus);
 
             scoreStatus.setFont(Font);
-            scoreStatus.setCharacterSize((int)(1.50*taille_Font));
-            scoreStatus.setString("Score : "+ Score.getScore());
-            scoreStatus.setPosition(scoreStatus.getLocalBounds().width -15, App.getSize().y - scoreStatus.getLocalBounds().height - 20);
+            scoreStatus.setCharacterSize((int) (1.50 * taille_Font));
+            scoreStatus.setString("Score : " + Score.getScore());
+            scoreStatus.setPosition(scoreStatus.getLocalBounds().width - 15, App.getSize().y - scoreStatus.getLocalBounds().height - 20);
             App.draw(scoreStatus);
 
             for(int i = 0 ; i<EntityManager.getEntityList().size() ; i++) {

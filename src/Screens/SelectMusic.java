@@ -174,6 +174,7 @@ public class SelectMusic extends cScreen{
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.RETURN)) {
                             sound.stop();
+                            startMusic("rsc/sound/son_poules_menus.wav");
                             if (menu == 0) {
 
                                 return (3);
@@ -194,6 +195,7 @@ public class SelectMusic extends cScreen{
                     if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                         event.asMouseEvent();
                         pos = Mouse.getPosition(App);
+                        startMusic("rsc/sound/son_poules_menus.wav");
 
                         if(vitesse1.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             vitesse = 0;

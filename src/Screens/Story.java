@@ -52,7 +52,7 @@ public class Story extends  cScreen {
 
 
         long debut_bootsplash = System.currentTimeMillis();
-        int duree=30000;
+        int duree=45000;
 
         while (System.currentTimeMillis()-debut_bootsplash<duree && Running)
         {

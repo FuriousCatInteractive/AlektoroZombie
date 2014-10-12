@@ -12,7 +12,7 @@ import Screens.SelectMusic;
 
 public class PlaceMobs {
 
-    final private int radiusSpawnMobs = (int) Math.sqrt(Math.pow(350,2)+Math.pow(350,2));
+    final private int radiusSpawnMobs = (int) Math.sqrt(Math.pow(400,2)+Math.pow(400,2));
 
 
     private ArrayList <Mob>listMobs=new ArrayList <Mob>();

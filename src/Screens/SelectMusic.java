@@ -19,6 +19,8 @@ public class SelectMusic extends cScreen{
     private int alpha_div = 1;
     private boolean playing;
     Sound sound;
+    private static int speedPlayerChoice = 1;
+    private static int musicPlayerChoice = 0;
 
     public int Run(RenderWindow App){
 
@@ -34,9 +36,13 @@ public class SelectMusic extends cScreen{
         Text vitesse3 = new Text();
         Text vitesse4 = new Text();
         Text vitesse5 = new Text();
+        Text vitesseLabel = new Text();
+        Text start = new Text();
 
 
         int menu = 0;
+        int vitesse = 0;
+        int select = 0;
 
 
         try {
@@ -56,42 +62,52 @@ public class SelectMusic extends cScreen{
         Menu1.setFont(Font);
         Menu1.setCharacterSize(taille_Font);
         Menu1.setString("Musique #1");
-        Menu1.setPosition( App.getSize().x/2-Menu1.getLocalBounds().width/2, App.getSize().y/3);
+        Menu1.setPosition( App.getSize().x/2-Menu1.getLocalBounds().width/2, App.getSize().y/4);
 
         Menu2.setFont(Font);
         Menu2.setCharacterSize(taille_Font);
         Menu2.setString("Musique #2");
-        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/3+1*taille_Font+20);
+        Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/4+taille_Font);
+
+        start.setFont(Font);
+        start.setCharacterSize(taille_Font+20);
+        start.setString("START");
+        start.setPosition(  App.getSize().x/2-start.getLocalBounds().width/2, App.getSize().y-4*taille_Font);
 
         retour.setFont(Font);
-        retour.setCharacterSize(taille_Font);
+        retour.setCharacterSize(taille_Font-20);
         retour.setString("Retour");
-        retour.setPosition(  App.getSize().x/2-retour.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
+        retour.setPosition(  App.getSize().x/2-retour.getLocalBounds().width/2, App.getSize().y-2*taille_Font);
+
+        vitesseLabel.setFont(Font);
+        vitesseLabel.setCharacterSize(taille_Font);
+        vitesseLabel.setString("Vitesse");
+        vitesseLabel.setPosition(App.getSize().x/2-vitesseLabel.getLocalBounds().width/2, (App.getSize().y/4)+3*taille_Font);
 
         vitesse1.setFont(Font);
         vitesse1.setCharacterSize(taille_Font);
         vitesse1.setString("x1");
-        vitesse1.setPosition( App.getSize().x/5-vitesse1.getLocalBounds().width/2, App.getSize().y/3+3*taille_Font);
+        vitesse1.setPosition( App.getSize().x/5-vitesse1.getLocalBounds().width/2, (App.getSize().y/4)+4*taille_Font);
 
         vitesse2.setFont(Font);
         vitesse2.setCharacterSize(taille_Font);
         vitesse2.setString("x2");
-        vitesse2.setPosition( (App.getSize().x/5-vitesse2.getLocalBounds().width/2)*2, App.getSize().y/3+3*taille_Font);
+        vitesse2.setPosition( (App.getSize().x/5-vitesse2.getLocalBounds().width/2)*2, (App.getSize().y/4)+4*taille_Font);
 
         vitesse3.setFont(Font);
         vitesse3.setCharacterSize(taille_Font);
         vitesse3.setString("x3");
-        vitesse3.setPosition( (App.getSize().x/5-vitesse3.getLocalBounds().width/2)*3, App.getSize().y/3+3*taille_Font);
+        vitesse3.setPosition( (App.getSize().x/5-vitesse3.getLocalBounds().width/2)*3, (App.getSize().y/4)+4*taille_Font);
 
         vitesse4.setFont(Font);
         vitesse4.setCharacterSize(taille_Font);
         vitesse4.setString("x4");
-        vitesse4.setPosition( (App.getSize().x/5-vitesse4.getLocalBounds().width/2)*4, App.getSize().y/3+3*taille_Font);
+        vitesse4.setPosition( (App.getSize().x/5-vitesse4.getLocalBounds().width/2)*4, (App.getSize().y/4)+4*taille_Font);
 
         vitesse5.setFont(Font);
         vitesse5.setCharacterSize(taille_Font);
         vitesse5.setString("x5");
-        vitesse5.setPosition( (App.getSize().x/5-vitesse5.getLocalBounds().width/2)*5, App.getSize().y/3+3*taille_Font);
+        vitesse5.setPosition( (App.getSize().x/5-vitesse5.getLocalBounds().width/2)*5, (App.getSize().y/4)+4*taille_Font);
 
 
         Vector2i pos = new Vector2i(0,0);
@@ -109,7 +125,7 @@ public class SelectMusic extends cScreen{
                         return (-1);
                     }
 
-                    if (event.type == Event.Type.MOUSE_MOVED) {
+                    if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                         event.asMouseEvent();
                         pos = Mouse.getPosition(App);
 
@@ -126,24 +142,9 @@ public class SelectMusic extends cScreen{
                             menu = 2;
                             // System.out.println("menu0");
                         }
-                    }
-
-                    //clic de la souris
-                    if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-                        event.asMouseEvent();
-                        if (menu == 0) {
-                            sound.stop();
-                            return (3);
+                        else if(start.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            menu = 3;
                         }
-                        else if (menu == 1){
-                            //Let's get work...
-                            sound.stop();
-                            return (3);
-                        }
-                        else if (menu == 2){
-                            return 1;
-                        }
-
                     }
 
                     //Key pressed
@@ -182,6 +183,71 @@ public class SelectMusic extends cScreen{
                             }
                         }
                     }
+
+                    if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+                        event.asMouseEvent();
+                        pos = Mouse.getPosition(App);
+
+                        if(vitesse1.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            vitesse = 0;
+                            //System.out.println("menu1");
+                        }
+                        else if(vitesse2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            vitesse = 1;
+                            // System.out.println("menu0");
+                        }
+                        else if(vitesse3.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            vitesse = 2;
+                            // System.out.println("menu0");
+                        }
+                        else if(vitesse4.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            vitesse = 3;
+                            // System.out.println("menu0");
+                        }
+                        else if(vitesse5.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            vitesse = 4;
+                            // System.out.println("menu0");
+                        }
+                        speedPlayerChoice = vitesse + 1;
+                        musicPlayerChoice = menu;
+                    }
+
+                    if (event.type == Event.Type.MOUSE_MOVED) {
+                        event.asMouseEvent();
+                        pos = Mouse.getPosition(App);
+
+                        if(Menu1.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            select = 0;
+                            //System.out.println("menu1");
+
+                        }
+                        else if(Menu2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            select = 1;
+                            // System.out.println("menu0");
+                        }
+                        else if(retour.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+                            select = 2;
+                            // System.out.println("menu0");
+                        }
+                        else if(start.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            select = 3;
+                        }
+                        else if(vitesse1.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            select = 4;
+                        }
+                        else if(vitesse2.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            select = 5;
+                        }
+                        else if(vitesse3.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            select = 6;
+                        }
+                        else if(vitesse4.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            select = 7;
+                        }
+                        else if(vitesse5.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            select = 8;
+                        }
+                    }
                 }
             }
 
@@ -189,27 +255,112 @@ public class SelectMusic extends cScreen{
             {
                 Menu1.setColor(Color.RED);
                 Menu2.setColor(Color.WHITE);
+                start.setColor(Color.WHITE);
                 retour.setColor(Color.WHITE);
             }
             else if (menu == 1)
             {
                 Menu1.setColor(Color.WHITE);
                 Menu2.setColor(Color.RED);
+                start.setColor(Color.WHITE);
                 retour.setColor(Color.WHITE);
             }
             else if (menu == 2)
             {
                 Menu1.setColor(Color.WHITE);
                 Menu2.setColor(Color.WHITE);
+                start.setColor(Color.WHITE);
                 retour.setColor(Color.RED);
+                return 1;
+            }
+            else if (menu == 3) {
+                Menu1.setColor(Color.WHITE);
+                Menu2.setColor(Color.WHITE);
+                start.setColor(Color.RED);
+                retour.setColor(Color.WHITE);
+                return 3;
+            }
+
+
+            if (vitesse == 0)
+            {
+                vitesse1.setColor(Color.RED);
+                vitesse2.setColor(Color.WHITE);
+                vitesse3.setColor(Color.WHITE);
+                vitesse4.setColor(Color.WHITE);
+                vitesse5.setColor(Color.WHITE);
+            }
+            else if (vitesse == 1)
+            {
+                vitesse1.setColor(Color.WHITE);
+                vitesse2.setColor(Color.RED);
+                vitesse3.setColor(Color.WHITE);
+                vitesse4.setColor(Color.WHITE);
+                vitesse5.setColor(Color.WHITE);
+            }
+            else if (vitesse == 2)
+            {
+                vitesse1.setColor(Color.WHITE);
+                vitesse2.setColor(Color.WHITE);
+                vitesse3.setColor(Color.RED);
+                vitesse4.setColor(Color.WHITE);
+                vitesse5.setColor(Color.WHITE);
+            }
+            else if (vitesse == 3)
+            {
+                vitesse1.setColor(Color.WHITE);
+                vitesse2.setColor(Color.WHITE);
+                vitesse3.setColor(Color.WHITE);
+                vitesse4.setColor(Color.RED);
+                vitesse5.setColor(Color.WHITE);
+            }
+            else if (vitesse == 4)
+            {
+                vitesse1.setColor(Color.WHITE);
+                vitesse2.setColor(Color.WHITE);
+                vitesse3.setColor(Color.WHITE);
+                vitesse4.setColor(Color.WHITE);
+                vitesse5.setColor(Color.RED);
+            }
+
+            switch (select) {
+                case 0:
+                    Menu1.setColor(Color.RED);
+                    break;
+                case 1:
+                    Menu2.setColor(Color.RED);
+                    break;
+                case 2:
+                    retour.setColor(Color.RED);
+                    break;
+                case 3:
+                    start.setColor(Color.RED);
+                    break;
+                case 4:
+                    vitesse1.setColor(Color.RED);
+                    break;
+                case 5:
+                    vitesse2.setColor(Color.RED);
+                    break;
+                case 6:
+                    vitesse3.setColor(Color.RED);
+                    break;
+                case 7:
+                    vitesse4.setColor(Color.RED);
+                    break;
+                case 8:
+                    vitesse5.setColor(Color.RED);
+                    break;
             }
 
 
             App.clear();
             App.draw(Titre);
             App.draw(retour);
+            App.draw(start);
             App.draw(Menu1);
             App.draw(Menu2);
+            App.draw(vitesseLabel);
             App.draw(vitesse1);
             App.draw(vitesse2);
             App.draw(vitesse3);
@@ -239,6 +390,14 @@ public class SelectMusic extends cScreen{
         sound.setBuffer(soundBuffer);
         sound.play();
         //sound.setVolume(40.0f);
+    }
+
+    public static int getSpeedPlayerChoice() {
+        return speedPlayerChoice;
+    }
+
+    public static void setSpeedPlayerChoice(int speedPlayerChoice) {
+        SelectMusic.speedPlayerChoice = speedPlayerChoice;
     }
 
 }

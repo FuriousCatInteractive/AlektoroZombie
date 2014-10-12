@@ -2,15 +2,13 @@ package PlaceEntities;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 
-
-import Entities.GameBaseEntity;
 import Entities.Mob;
 import Entities.Player;
 import MoveBehavior.SeekMove;
 import Parsing.ListEnemy;
+import Screens.SelectMusic;
 
 public class PlaceMobs {
 
@@ -39,7 +37,7 @@ public class PlaceMobs {
         ListEnemy LE = DeserializationListEnemy(songTitle);
         for(int i = 0; i < LE.lenght();i++)
         {
-            Mob m = new Mob(i, new SeekMove(Player.getInstance()), 1, false, LE.LEnemy.get(i).getAngle(),radiusSpawnMobs, LE.LEnemy.get(i).getTime());
+            Mob m = new Mob(i, new SeekMove(Player.getInstance()), SelectMusic.getSpeedPlayerChoice(), false, LE.LEnemy.get(i).getAngle(),radiusSpawnMobs, LE.LEnemy.get(i).getTime());
             listMobs.add(m);
         }
         cptInit = 0;

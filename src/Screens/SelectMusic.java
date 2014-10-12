@@ -3,6 +3,7 @@ package Screens;
 import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 import org.jsfml.graphics.*;
+import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -109,6 +110,7 @@ public class SelectMusic extends cScreen{
         vitesse5.setString("x5");
         vitesse5.setPosition( (App.getSize().x/5-vitesse5.getLocalBounds().width/2)*5, (App.getSize().y/4)+4*taille_Font);
 
+        Sprite viseur = loadViseur(App);
 
         Vector2i pos = new Vector2i(0,0);
         startMusic("rsc/sound/son_poules_menus.wav");
@@ -157,14 +159,14 @@ public class SelectMusic extends cScreen{
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)){
                             menu++;
-                            if(menu>2)
+                            if(menu>3)
                                 menu = 0;
                         }
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.UP)) {
                             menu--;
                             if(menu<0)
-                                menu = 2;
+                                menu = 3;
                         }
 
 
@@ -180,6 +182,9 @@ public class SelectMusic extends cScreen{
                             else if (menu == 2){
 
                                 return 1;
+                            }
+                            else if (menu == 3){
+                                return 3;
                             }
                         }
                     }
@@ -355,6 +360,9 @@ public class SelectMusic extends cScreen{
 
 
             App.clear();
+            Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
+            viseur.setPosition(posViseur);
+            App.draw(viseur);
             App.draw(Titre);
             App.draw(retour);
             App.draw(start);

@@ -12,6 +12,7 @@ import Entities.*;
 import Graphics.TextureManager;
 
 import org.jsfml.graphics.*;
+import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -26,6 +27,7 @@ import PlaceEntities.PlacePlayer;
  */
 public class GameLoop extends cScreen {
 
+    Clock gameClock;
 
     public int Run(RenderWindow App) {
 
@@ -58,7 +60,7 @@ public class GameLoop extends cScreen {
         PlacePlayer PlayerSpawnManager = new PlacePlayer();
         EntityManager.addEntity(Player.getInstance());
 
-        PlaceMobs MobsSpawnManager = new PlaceMobs(Player.getInstance(), "rsc/sound/Zelda3.serial");
+        PlaceMobs MobsSpawnManager = new PlaceMobs("rsc/sound/Zelda3.serial");
         ArrayList<Mob> listeMobs = MobsSpawnManager.getMobsList();
         for (int i=0; i<listeMobs.size(); i++){
             try {
@@ -77,9 +79,22 @@ public class GameLoop extends cScreen {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
+        gameClock =new Clock();
+        gameClock.restart();
 
         while (App.isOpen()){
+            Mob tempMonstre;
+            long currentTime=gameClock.getElapsedTime().asMilliseconds();
+            if (currentTime<0) currentTime=0;
+            //TOCHANGE
+            if(MobsSpawnManager.nextEnemy(false,currentTime)!=null)
+            try {
+                tempMonstre=MobsSpawnManager.nextEnemy(true,currentTime);
+                // ((Mob) manager.getEntity("Mob", manager.getEntityList().indexOf(tempMonstre))).setMovable(true);
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
             if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                 return 2;
@@ -116,7 +131,7 @@ public class GameLoop extends cScreen {
 
             // Draw and update Game entity
             for(GameBaseEntity it : EntityManager.getEntityList()) {
-                if(it.getPosition().x < 0 || it.getPosition().y < 0 || it.getPosition().x > App.getSize().x || it.getPosition().y > App.getSize().y) {
+                if((it.getPosition().x < 0 || it.getPosition().y < 0 || it.getPosition().x > App.getSize().x || it.getPosition().y > App.getSize().y) && it instanceof Bullet) {
                     it.setVisible(false);
                 }
                 if(!(it instanceof Player)) {

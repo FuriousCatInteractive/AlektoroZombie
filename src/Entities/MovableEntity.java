@@ -23,6 +23,7 @@ public abstract class MovableEntity extends GameBaseEntity {
     }
 
     public void moveEntity() throws Exception{
+        if (this instanceof Mob && !((Mob)this).getMovable())return;
         if(moveStrategy != null) {
             Vector2f velocity = moveStrategy.move(this);
             this.setPosition(Vector2f.add(this.getPosition(), velocity));

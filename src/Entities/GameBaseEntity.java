@@ -83,11 +83,13 @@ public abstract class GameBaseEntity extends Sprite{
     	else
     	{
     		this.angle = XOrAngle;
-    		this.radius = YOrRadius;
-    		this.setPosition((int)(Player.getInstance().getPosition().x+radius * Math.cos(angle)), 
-    							(int)(Player.getInstance().getPosition().y+radius * Math.sin(angle)));
-    		
-    	}
+    		this.radius = YOrRadius;Player P=Player.getInstance();
+            float Px=350;
+            float Py=350;
+            this.setPosition((int)(Px+radius * Math.cos(Math.toRadians(angle))),
+                    (int)(Py+radius * Math.sin(Math.toRadians(angle))));
+
+        }
     }
 
 

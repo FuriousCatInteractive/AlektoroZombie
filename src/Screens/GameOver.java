@@ -113,7 +113,7 @@ public class GameOver extends cScreen {
 
         //Never reaching this point normally, but just in case, exit the application
         System.out.println("game over finit");
-        return (1);
+        return (6);
     }
 
     private void startMusic(String path)

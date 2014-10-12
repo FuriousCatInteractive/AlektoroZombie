@@ -15,8 +15,8 @@ public class ViewFinder implements Drawable{
 
     public ViewFinder() {
         posMouse = new Vector2i(0, 0);
-        viewFinder = new RectangleShape(new Vector2f(150, 2));
-        viewFinder.setFillColor(new Color(198, 8, 0, 50));
+        viewFinder = new RectangleShape(new Vector2f(150, 3));
+        viewFinder.setFillColor(new Color(198, 8, 0, 70));
     }
 
     public void updateViewFinder(Vector2i posMouse, Player player) {

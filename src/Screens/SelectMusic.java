@@ -29,6 +29,11 @@ public class SelectMusic extends cScreen{
         Text Menu2 = new Text();
         Text retour = new Text();
         Text Titre = new Text();
+        Text vitesse1 = new Text();
+        Text vitesse2 = new Text();
+        Text vitesse3 = new Text();
+        Text vitesse4 = new Text();
+        Text vitesse5 = new Text();
 
 
         int menu = 0;
@@ -62,6 +67,31 @@ public class SelectMusic extends cScreen{
         retour.setCharacterSize(taille_Font);
         retour.setString("Retour");
         retour.setPosition(  App.getSize().x/2-retour.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
+
+        vitesse1.setFont(Font);
+        vitesse1.setCharacterSize(taille_Font);
+        vitesse1.setString("x1");
+        vitesse1.setPosition( App.getSize().x/5-vitesse1.getLocalBounds().width/2, App.getSize().y/3+3*taille_Font);
+
+        vitesse2.setFont(Font);
+        vitesse2.setCharacterSize(taille_Font);
+        vitesse2.setString("x2");
+        vitesse2.setPosition( (App.getSize().x/5-vitesse2.getLocalBounds().width/2)*2, App.getSize().y/3+3*taille_Font);
+
+        vitesse3.setFont(Font);
+        vitesse3.setCharacterSize(taille_Font);
+        vitesse3.setString("x3");
+        vitesse3.setPosition( (App.getSize().x/5-vitesse3.getLocalBounds().width/2)*3, App.getSize().y/3+3*taille_Font);
+
+        vitesse4.setFont(Font);
+        vitesse4.setCharacterSize(taille_Font);
+        vitesse4.setString("x4");
+        vitesse4.setPosition( (App.getSize().x/5-vitesse4.getLocalBounds().width/2)*4, App.getSize().y/3+3*taille_Font);
+
+        vitesse5.setFont(Font);
+        vitesse5.setCharacterSize(taille_Font);
+        vitesse5.setString("x5");
+        vitesse5.setPosition( (App.getSize().x/5-vitesse5.getLocalBounds().width/2)*5, App.getSize().y/3+3*taille_Font);
 
 
         Vector2i pos = new Vector2i(0,0);
@@ -180,6 +210,11 @@ public class SelectMusic extends cScreen{
             App.draw(retour);
             App.draw(Menu1);
             App.draw(Menu2);
+            App.draw(vitesse1);
+            App.draw(vitesse2);
+            App.draw(vitesse3);
+            App.draw(vitesse4);
+            App.draw(vitesse5);
             App.display();
         }
 

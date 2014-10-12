@@ -35,6 +35,8 @@ public class GameLoop extends cScreen {
 
     public int Run(RenderWindow App) {
 
+        startMusic("rsc/sound/son_poules_menus.wav");
+
         CircleShape circle = new CircleShape(200);
         circle.setOutlineColor(Color.GREEN);
         circle.setFillColor(Color.TRANSPARENT);
@@ -135,6 +137,9 @@ public class GameLoop extends cScreen {
                     event.asMouseEvent();
                     try {
                         ((Player)EntityManager.getEntity("Player", 0)).fire();
+                        //Sound s1=  startMusic("rsc/sound/lancer_pierre.wav");
+                       // s1.setVolume(40.0f);
+
                     }
                     catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -170,8 +175,8 @@ public class GameLoop extends cScreen {
                     ((Mob)(it)).updateDirection(posMOb, App.getSize());
 
                     boolean intersect = false;
-                    FloatRect rectMob = new FloatRect(it.getGlobalBounds().left+14,it.getGlobalBounds().top+14,
-                            it.getGlobalBounds().width-14,it.getGlobalBounds().height-14);
+                    FloatRect rectMob = new FloatRect(it.getGlobalBounds().left+9,it.getGlobalBounds().top+9,
+                            it.getGlobalBounds().width-9,it.getGlobalBounds().height-9);
                     for(int cpt =0; cpt<circle.getPointCount();cpt++){
 
                         if(rectMob.contains(circle.getPoint(cpt).x+posCirclex,circle.getPoint(cpt).y+posCircley)) {
@@ -210,6 +215,8 @@ public class GameLoop extends cScreen {
                 }
                 else if(!EntityManager.getEntityList().get(i).isAlive() && EntityManager.getEntityList().get(i) instanceof Mob) {
                     ((Mob) EntityManager.getEntityList().get(i)).decDieAnim();
+                    //Sound s2=startMusic("rsc/sound/poulet_cri_attenue.wav");
+                   // s2.setVolume(2.0f);
                 }
             }
 
@@ -220,6 +227,7 @@ public class GameLoop extends cScreen {
                     ((Player) EntityManager.getEntity("Player", 0)).reset();
                     EntityManager.getEntityList().clear();
                     sound.stop();
+                    startMusic("rsc/sound/zombie_agonie.wav");
                     return 4;
                 }
                 else {
@@ -246,7 +254,7 @@ public class GameLoop extends cScreen {
         return -1;//exit
     }
 
-    private void startMusic(String path)
+    private Sound startMusic(String path)
     {
         SoundBuffer soundBuffer = new SoundBuffer();
         try {
@@ -262,7 +270,8 @@ public class GameLoop extends cScreen {
         sound = new Sound();
         sound.setBuffer(soundBuffer);
         sound.play();
-        //sound.setVolume(40.0f);
+
+        return sound;
     }
 }
 

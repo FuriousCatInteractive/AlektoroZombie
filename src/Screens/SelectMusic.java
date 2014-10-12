@@ -65,6 +65,7 @@ public class SelectMusic extends cScreen{
 
 
         Vector2i pos = new Vector2i(0,0);
+        startMusic("rsc/sound/son_poules_menus.wav");
         startMusic("rsc/sound/king.it.ogg");
 
         while (Running)

@@ -88,6 +88,7 @@ public class Menu extends cScreen{
         Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
 
         Vector2i pos = new Vector2i(0,0);
+        startMusic("rsc/sound/son_poules_menus.wav");
         startMusic("rsc/sound/king.it.ogg");
 
         while (Running)

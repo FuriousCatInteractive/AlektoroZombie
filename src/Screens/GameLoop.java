@@ -138,8 +138,9 @@ public class GameLoop extends cScreen {
             playerHealthStatus.setFont(Font);
             playerHealthStatus.setCharacterSize((int)(1.50*taille_Font));
             playerHealthStatus.setString("Points de vie restants : "+Player.getInstance().getHealthPoints());
-            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width - 6, App.getSize().y - playerHealthStatus.getLocalBounds().height - 6);
+            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width -10, App.getSize().y - playerHealthStatus.getLocalBounds().height - 10);
             App.draw(playerHealthStatus);
+
 
             for(int i = 0 ; i<manager.getEntityList().size() ; i++) {
                 if(!manager.getEntityList().get(i).isVisible()) {

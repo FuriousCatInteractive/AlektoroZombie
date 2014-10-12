@@ -52,7 +52,7 @@ public class GameLoop extends cScreen {
             e.printStackTrace();
             return (-1);
         }
-        Text GameOverText = new Text();
+
 
         Vector2i pos = new Vector2i(0, 0);
 
@@ -89,13 +89,13 @@ public class GameLoop extends cScreen {
             if (currentTime<0) currentTime=0;
             //TOCHANGE
             if(MobsSpawnManager.nextEnemy(false,currentTime)!=null)
-            try {
-                tempMonstre=MobsSpawnManager.nextEnemy(true,currentTime);
-                // ((Mob) manager.getEntity("Mob", manager.getEntityList().indexOf(tempMonstre))).setMovable(true);
-            }
-            catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+                try {
+                    tempMonstre=MobsSpawnManager.nextEnemy(true,currentTime);
+                    // ((Mob) manager.getEntity("Mob", manager.getEntityList().indexOf(tempMonstre))).setMovable(true);
+                }
+                catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
 
             if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                 return 2;
@@ -177,29 +177,16 @@ public class GameLoop extends cScreen {
 
             if(Player.getInstance().getHealthPoints() <= 0)
             {
-                //Defaite
-                //ecran Game Over
-                App.clear(BLACK);
-                //Texte de defaite
-                GameOverText.setFont(Font);
-                GameOverText.setCharacterSize((int)(2.90*taille_Font));
-                GameOverText.setString("You died ! \n Game Over");
-                GameOverText.setPosition(App.getSize().x/2 - GameOverText.getLocalBounds().width/2, App.getSize().y/2 - GameOverText.getLocalBounds().height/2);
-                App.draw(GameOverText);
-                App.display();
                 try {
-                    Thread.sleep(2000);                 //1000 milliseconds is one second.
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
+                    ((Player)EntityManager.getEntity("Player",0)).reset();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
-                return 1;
+                return 4;
             }
-            /*else if(//fin de la musique)
-            {
 
-            }*/
-
+            System.out.println(Player.getInstance().getHealthPoints() );
             App.display();
             App.draw(background);
         }

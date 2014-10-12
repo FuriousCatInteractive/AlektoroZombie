@@ -26,12 +26,13 @@ public class Main {
         System.out.println("top: " + rectWindow1.top + " left: " + rectWindow1.left + " width: " + rectWindow1.height);
 
         //Applications variables
-        cScreen[] Screens = new cScreen[4];
+        cScreen[] Screens = new cScreen[5];
         int screen = 0;
         Screens[0] = new BootSplash();
         Screens[1] = new Menu();
         Screens[2] = new SelectMusic();
         Screens[3] = new GameLoop();
+        Screens[4] = new GameOver();
 
         while (screen >= 0) {
             screen = Screens[screen].Run(window1);

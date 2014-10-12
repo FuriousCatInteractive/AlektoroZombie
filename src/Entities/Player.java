@@ -62,7 +62,7 @@ public class Player extends MovableEntity{
     @Override
     public void touch() {
         --healthPoints;
-    }
+    }//
 
     @Override
     public void detectCollision() {

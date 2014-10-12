@@ -34,6 +34,16 @@ public class Menu extends cScreen{
         Text Menu3 = new Text();
         Text Titre = new Text();
         Text bottomText = new Text();
+        Sprite helpSprite = new Sprite();
+        Texture textureSprite = new Texture();
+        try {
+            textureSprite.loadFromFile(Paths.get("rsc/img/Sprite?.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        helpSprite.setTexture(textureSprite);
+        helpSprite.setScale(1f, 1f);
+        helpSprite.setPosition(1, App.getSize().y-60);
 
 
         int menu = 0;
@@ -123,6 +133,9 @@ public class Menu extends cScreen{
                         else if(Menu3.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 2;
                         }
+                        else if(helpSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+                            menu = 3;
+                        }
                     }
 
                     //clic de la souris
@@ -136,6 +149,9 @@ public class Menu extends cScreen{
                         else if(menu == 1){
                             //configuration
                             return (2);
+                        }
+                        else if(menu == 3){
+                            return 8;
                         }
                         else//quitter
                             return -1;
@@ -204,6 +220,11 @@ public class Menu extends cScreen{
                 Menu2.setColor(new Color(255, 255, 255, 255));
                 Menu3.setColor(new Color(255, 0, 0, 255));
             }
+            else if(menu == 3) {
+                Menu1.setColor(new Color(255, 255, 255, 255));
+                Menu2.setColor(new Color(255, 255, 255, 255));
+                Menu3.setColor(new Color(255, 255, 255, 255));
+            }
             Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
             viseur.setPosition(posViseur);
 
@@ -216,9 +237,9 @@ public class Menu extends cScreen{
             App.draw(Menu3);
             App.draw(background);
             App.draw(bottomText);
+            App.draw(helpSprite);
 
             App.draw(viseur);
-
             App.display();
         }
 

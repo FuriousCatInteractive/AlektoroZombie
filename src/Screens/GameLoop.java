@@ -82,7 +82,16 @@ public class GameLoop extends cScreen {
         PlacePlayer PlayerSpawnManager = new PlacePlayer();
         EntityManager.addEntity(Player.getInstance());
 
-        PlaceMobs MobsSpawnManager = new PlaceMobs("rsc/sound/Zelda3.serial");
+
+        PlaceMobs MobsSpawnManager;
+        if(SelectMusic.getMusicPlayerChoice() == 1){
+            MobsSpawnManager = new PlaceMobs("rsc/sound/Zelda3.serial");
+        }
+         else {
+            MobsSpawnManager = new PlaceMobs("rsc/sound/FeintLaurence.serial");///////////////////////////////////////////////////
+        }
+
+
         ArrayList<Mob> listeMobs = MobsSpawnManager.getMobsList();
         for (int i=0; i<listeMobs.size(); i++){
             try {
@@ -104,7 +113,20 @@ public class GameLoop extends cScreen {
         gameClock =new Clock();
         gameClock.restart();
 
-        startMusic("rsc/sound/ZeldaDance.ogg");
+        System.out.println("music ---->  "+SelectMusic.getMusicPlayerChoice());
+        if(SelectMusic.getMusicPlayerChoice() == 1){
+            startMusic("rsc/sound/ZeldaDance.ogg");
+        }
+        else {
+            Sound s =startMusic("rsc/sound/FeintLaurence.ogg");//////////////////////////////////////////////////////////////
+          /*  try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+
+        }
+
         while (App.isOpen()){
 
 
@@ -123,6 +145,12 @@ public class GameLoop extends cScreen {
 
             if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                 sound.stop();
+                EntityManager.getEntityList().clear();
+                try {
+                    ((Player)EntityManager.getEntity("Player",0)).reset();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return 1;
             }
             // On gère les événements
@@ -244,6 +272,12 @@ public class GameLoop extends cScreen {
                     ((Player) EntityManager.getEntity("Player", 0)).reset();
                     EntityManager.getEntityList().clear();
                     sound.stop();
+                    EntityManager.getEntityList().clear();
+                    try {
+                        ((Player)EntityManager.getEntity("Player",0)).reset();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     startMusic("rsc/sound/zombie_agonie.wav");
                     return 4;
                 }
@@ -255,6 +289,12 @@ public class GameLoop extends cScreen {
                     }
                     //victoire
                     if(win == true) {
+                        EntityManager.getEntityList().clear();
+                        try {
+                            ((Player)EntityManager.getEntity("Player",0)).reset();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         sound.stop();
                         return 5;
                     }

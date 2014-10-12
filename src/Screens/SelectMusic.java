@@ -134,12 +134,15 @@ public class SelectMusic extends cScreen{
 
                         if(Menu1.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 0;
-                            //System.out.println("menu1");
+                            setMusicPlayerChoice(1);
+                            System.out.println("menu1  "+ getMusicPlayerChoice());
 
                         }
                         else if(Menu2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 1;
-                            // System.out.println("menu0");
+                            setMusicPlayerChoice(2);
+                            System.out.println("menu2 "+ getMusicPlayerChoice());
+
                         }
                         else if(retour.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 2;
@@ -176,11 +179,11 @@ public class SelectMusic extends cScreen{
                             sound.stop();
                             startMusic("rsc/sound/son_poules_menus.wav");
                             if (menu == 0) {
-
+                                setMusicPlayerChoice(1);
                                 return (3);
                             } else if (menu == 1) {
                                 //Let's get work...
-
+                                setMusicPlayerChoice(2);
                                 return (3);}
                             else if (menu == 2){
 
@@ -218,7 +221,7 @@ public class SelectMusic extends cScreen{
                             // System.out.println("menu0");
                         }
                         speedPlayerChoice = vitesse + 1;
-                        musicPlayerChoice = menu;
+                        //musicPlayerChoice = menu;
                     }
 
                     if (event.type == Event.Type.MOUSE_MOVED) {
@@ -413,5 +416,15 @@ public class SelectMusic extends cScreen{
     public static void setSpeedPlayerChoice(int speedPlayerChoice) {
         SelectMusic.speedPlayerChoice = speedPlayerChoice;
     }
+
+    public static int getMusicPlayerChoice() {
+        return musicPlayerChoice;
+    }
+
+    public static void setMusicPlayerChoice(int musicPlayerChoice) {
+        SelectMusic.musicPlayerChoice = musicPlayerChoice;
+    }
+
+
 
 }

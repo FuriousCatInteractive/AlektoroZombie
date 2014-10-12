@@ -83,4 +83,9 @@ public class Player extends MovableEntity{
     public void setVectorViewFinder(Vector2f vectorViewFinder) {
         this.vectorViewFinder = vectorViewFinder;
     }
+
+    public int getHealthPoints()
+    {
+        return healthPoints;
+    }
 }

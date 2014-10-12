@@ -2,6 +2,8 @@ package Screens;
 
 import static org.jsfml.graphics.Color.BLACK;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -9,7 +11,9 @@ import Entities.*;
 
 import Graphics.TextureManager;
 
+import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderWindow;
+import org.jsfml.graphics.Text;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -26,6 +30,17 @@ public class GameLoop extends cScreen {
 
 
     public int Run(RenderWindow App) {
+
+        //Vars pour affichage des points de vie du joueur
+        Text playerHealthStatus = new Text();
+        Font Font = new Font();
+        int taille_Font = 15;
+        try {
+            Font.loadFromFile(Paths.get("rsc/font/Frank Knows.ttf"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return (-1);
+        }
 
         Vector2i pos = new Vector2i(0, 0);
 
@@ -65,7 +80,7 @@ public class GameLoop extends cScreen {
                 if (event.type == Event.Type.CLOSED) {
                     // Si l'utilisateur clique sur la croix rouge alors on ferme
                     // la fenêtre
-                    return 2;
+                    return (-1);
                 }
 
                 if (event.type == Event.Type.MOUSE_MOVED) {
@@ -115,6 +130,14 @@ public class GameLoop extends cScreen {
                 TextureManager.updateTexture(it, it.getId(), it.getDirection());
                 App.draw(it);
             }
+
+
+            //Affichage des points de vie restants
+            playerHealthStatus.setFont(Font);
+            playerHealthStatus.setCharacterSize((int)(1.50*taille_Font));
+            playerHealthStatus.setString("Points de vie restants : "+Player.getInstance().getHealthPoints());
+            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width - 6, App.getSize().y - playerHealthStatus.getLocalBounds().height - 6);
+            App.draw(playerHealthStatus);
 
             for(int i = 0 ; i<EntityManager.getEntityList().size() ; i++) {
                 if(!EntityManager.getEntityList().get(i).isVisible()) {

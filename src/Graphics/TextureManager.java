@@ -110,7 +110,7 @@ public class TextureManager {
                 entityList.setScale(3f,3f);
             }
             else if(entityList instanceof Bullet) {
-                entityList.setTexture(loadTexture("rsc/img/poule.png"));
+                entityList.setTexture(loadTexture("rsc/img/rock.png"));
                 entityList.setScale(1f, 1f);
         }
         updateTexture(entityList,entityList.getId(),1);

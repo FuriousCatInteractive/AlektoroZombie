@@ -9,6 +9,7 @@ import Entities.*;
 
 import Graphics.TextureManager;
 
+import World.Score;
 import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 import org.jsfml.graphics.*;
@@ -63,6 +64,7 @@ public class GameLoop extends cScreen {
 
         //Vars pour affichage des points de vie du joueur
         Text playerHealthStatus = new Text();
+        Text scoreStatus = new Text();
         Font Font = new Font();
         int taille_Font = 15;
         try {
@@ -160,6 +162,7 @@ public class GameLoop extends cScreen {
             // Draw and update Game entity
             for(GameBaseEntity it : EntityManager.getEntityList()) {
                 if((it.getPosition().x < 0 || it.getPosition().y < 0 || it.getPosition().x > App.getSize().x || it.getPosition().y > App.getSize().y) && it instanceof Bullet) {
+                    Score.dec(2);
                     it.setVisible(false);
                 }
                 if(!(it instanceof Player)) {
@@ -213,9 +216,17 @@ public class GameLoop extends cScreen {
             playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width -10, App.getSize().y - playerHealthStatus.getLocalBounds().height - 10);
             App.draw(playerHealthStatus);
 
+            scoreStatus.setFont(Font);
+            scoreStatus.setCharacterSize((int)(1.50*taille_Font));
+            scoreStatus.setString("Score : "+ Score.getScore());
+            scoreStatus.setPosition(scoreStatus.getLocalBounds().width -10, App.getSize().y - scoreStatus.getLocalBounds().height - 10);
+            App.draw(scoreStatus);
+
             for(int i = 0 ; i<EntityManager.getEntityList().size() ; i++) {
                 if(!EntityManager.getEntityList().get(i).isVisible()) {
-                    System.out.println("Delete bullet");
+                    if(EntityManager.getEntityList().get(i) instanceof Mob) {
+                        Score.incKillChicken();
+                    }
                     EntityManager.getEntityList().remove(i);
                 }
                 else if(!EntityManager.getEntityList().get(i).isAlive() && EntityManager.getEntityList().get(i) instanceof Mob) {

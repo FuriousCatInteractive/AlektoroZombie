@@ -1,5 +1,6 @@
 package Screens;
 
+import World.Score;
 import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 import org.jsfml.graphics.Font;
@@ -41,7 +42,7 @@ public class ScoreScreen extends cScreen {
 
         numberChickenKill.setFont(font);
         numberChickenKill.setCharacterSize(50);
-        numberChickenKill.setString("10000");
+        numberChickenKill.setString(""+Score.getChickenKill());
         numberChickenKill.setPosition(App.getSize().x / 2 - numberChickenKill.getLocalBounds().width / 2, App.getSize().y / 4 -50);
 
         scoreLoseLabel.setFont(font);
@@ -51,7 +52,7 @@ public class ScoreScreen extends cScreen {
 
         scoreLose.setFont(font);
         scoreLose.setCharacterSize(50);
-        scoreLose.setString("-100");
+        scoreLose.setString("-"+Score.getLostPoints());
         scoreLose.setPosition(App.getSize().x/2-scoreLose.getLocalBounds().width/2, (App.getSize().y/4)*2-50);
 
         scoreLabel.setFont(font);
@@ -61,13 +62,18 @@ public class ScoreScreen extends cScreen {
 
         score.setFont(font);
         score.setCharacterSize(50);
-        score.setString("1000000");
+        score.setString(""+Score.getScore());
+
+
+
+
         score.setPosition(App.getSize().x/2-score.getLocalBounds().width/2, (App.getSize().y/4)*3-50);
 
         bottomText.setFont(font);
         bottomText.setCharacterSize((int)(0.50*50));
         bottomText.setString("Appuyez sur une touche");
         bottomText.setPosition( App.getSize().x/2-bottomText.getLocalBounds().width/2, App.getSize().y-bottomText.getLocalBounds().height-20);
+        Score.reset();
 
         while (Running) {
             //Verifying events

@@ -2,6 +2,9 @@ package Entities;
 
 import Graphics.TextureManager;
 import MoveBehavior.MoveBehavior;
+import World.Score;
+import org.jsfml.graphics.CircleShape;
+import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Vector2i;
 
 /**
@@ -23,6 +26,25 @@ public class Mob extends MovableEntity{
 
     @Override
     public void touch() {
+        CircleShape circle = new CircleShape(200);
+        circle.setPosition(700/2-200,700/2-200);
+        circle.setPointCount(50);
+        float posCirclex=circle.getPosition().x;
+        float posCircley=circle.getPosition().y;
+        boolean intersect = false;
+        FloatRect rectMob = new FloatRect(this.getGlobalBounds().left+14,this.getGlobalBounds().top+14,
+                this.getGlobalBounds().width-14,this.getGlobalBounds().height-14);
+        for(int cpt =0; cpt<circle.getPointCount();cpt++){
+
+            if(rectMob.contains(circle.getPoint(cpt).x+posCirclex,circle.getPoint(cpt).y+posCircley)) {
+                // System.out.println("caca" + circle.getPoint(cpt) + "+ " + circle.getPosition());
+                intersect=true;
+            }
+        }
+        if(intersect)
+            Score.inc(20);
+        else
+            Score.inc(2);
         this.moveStrategy = null;
         this.setAlive(false);
         TextureManager.loadImageOnSprite(this, "rsc/img/blood.png", 2f, 2f);

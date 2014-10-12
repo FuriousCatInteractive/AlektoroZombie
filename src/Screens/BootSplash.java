@@ -76,6 +76,9 @@ public class BootSplash extends cScreen{
                     {
                         return (-1);
                     }
+                    if(event.type == Event.Type.MOUSE_BUTTON_RELEASED) {
+                        return 7;
+                    }
                     //Key pressed
                     if (event.type == Event.Type.KEY_PRESSED)
                     {

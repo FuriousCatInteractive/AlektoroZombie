@@ -16,12 +16,14 @@ public class Menu extends cScreen{
     private int alpha_max;
     private int alpha_div = 1;
     private boolean playing;
+    Sound sound;
 
     public int Run(RenderWindow App){
 
         boolean Running = true;
         Texture Texture = new Texture();
         Sprite Sprite = new Sprite();
+        Sprite background = new Sprite();
         int alpha = 0;
         Font Font = new Font();
         Text Menu1 = new Text();
@@ -29,20 +31,31 @@ public class Menu extends cScreen{
         Text Menu3 = new Text();
         Text Titre = new Text();
 
+
         int menu = 0;
 
         try {
+            Texture maTexture = new Texture();
+            maTexture.loadFromFile(Paths.get("rsc/img/fond_menu.jpeg")); // on charge la texture qui se trouve dans notre dossier assets
+            background.setTexture(maTexture); // on applique la texture à notre sprite
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*try {
             Texture.loadFromFile(Paths.get("rsc/img/fond_menu.png"));
         } catch (IOException e) {
             e.printStackTrace();
             return (-1);
-        }
+        }*/
 
 
         Sprite.setTexture(Texture);
+        background.setPosition(App.getSize().x/2-background.getLocalBounds().width/2,
+                90f);
         //  Sprite.setColor(new Color(255, 255, 255, alpha));
         try {
-            Font.loadFromFile(Paths.get("rsc/font/Volter__28Goldfish_29.ttf"));
+            Font.loadFromFile(Paths.get("rsc/font/Frank Knows.ttf"));
         } catch (IOException e) {
             e.printStackTrace();
             return (-1);
@@ -76,7 +89,7 @@ public class Menu extends cScreen{
         {
             alpha = alpha_max;
         }*/
-        //startMusic("rsc/sound/king.it.ogg");
+        startMusic("rsc/sound/king.it.ogg");
 
         while (Running)
         {
@@ -96,20 +109,23 @@ public class Menu extends cScreen{
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
                             return  -1;
 
-                        if (Keyboard.isKeyPressed(Keyboard.Key.UP))
+                        if (Keyboard.isKeyPressed(Keyboard.Key.UP)){
                             menu = 0;
+                        }
 
-
-                        if (Keyboard.isKeyPressed(Keyboard.Key.DOWN))
+                        if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)) {
                             menu = 1;
+                        }
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.RETURN)) {
                             if (menu == 0) {
                                 //Let's get play !
                                 playing = true;
+                                sound.stop();
                                 return (2);
                             } else {
                                 //Let's get work...
+                                sound.stop();
                                 return (-1);
                             }
                         }
@@ -152,6 +168,7 @@ public class Menu extends cScreen{
                 }
                 App.draw(Menu2);
             }
+            App.draw(background);
             App.display();
         }
 
@@ -172,7 +189,7 @@ public class Menu extends cScreen{
         }
 
         //Create a sound and set its buffer
-        Sound sound = new Sound();
+        sound = new Sound();
         sound.setBuffer(soundBuffer);
         sound.play();
         //sound.setVolume(40.0f);

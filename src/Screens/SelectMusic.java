@@ -29,62 +29,31 @@ public class SelectMusic extends cScreen{
         Sprite background = new Sprite();
         int alpha = 0;
         Font Font = new Font();
+
         Text Menu1 = new Text();
         Text Menu2 = new Text();
         Text Menu3 = new Text();
         Text Titre = new Text();
-        Text bottomText = new Text();
-
 
         int menu = 0;
 
-        try {
-            Texture maTexture = new Texture();
-            maTexture.loadFromFile(Paths.get("rsc/img/fond_menu.jpeg")); // on charge la texture qui se trouve dans notre dossier assets
-            background.setTexture(maTexture); // on applique la texture à notre sprite
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        /*try {
-            Texture.loadFromFile(Paths.get("rsc/img/fond_menu.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return (-1);
-        }*/
 
 
-        Sprite.setTexture(Texture);
-        background.setPosition(App.getSize().x/2-background.getLocalBounds().width/2,
-                160f);
-        //  Sprite.setColor(new Color(255, 255, 255, alpha));
-        try {
-            Font.loadFromFile(Paths.get("rsc/font/Frank Knows.ttf"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return (-1);
-        }
-
-        int taille_Font = 70;
+        int taille_Font = 60;
 
         Titre.setFont(Font);
         Titre.setCharacterSize((int)(1.50*taille_Font));
-        Titre.setString("AlektoroZombie ");
+        Titre.setString("Sélection des musiques");
         Titre.setPosition( App.getSize().x/2-Titre.getLocalBounds().width/2, 20);
-
-        bottomText.setFont(Font);
-        bottomText.setCharacterSize((int)(0.30*taille_Font));
-        bottomText.setString("Furious Cat Interactive - WonderJam oct 2014 ");
-        bottomText.setPosition( App.getSize().x/2-bottomText.getLocalBounds().width/2, App.getSize().y-bottomText.getLocalBounds().height-20);
 
         Menu1.setFont(Font);
         Menu1.setCharacterSize(taille_Font);
-        Menu1.setString("Play");
+        Menu1.setString("Musique #1");
         Menu1.setPosition( App.getSize().x/2-Menu1.getLocalBounds().width/2, App.getSize().y/2+70);
 
         Menu2.setFont(Font);
         Menu2.setCharacterSize(taille_Font);
-        Menu2.setString("Exit");
+        Menu2.setString("Musique #2");
         Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
 
         Menu3.setFont(Font);
@@ -210,8 +179,7 @@ public class SelectMusic extends cScreen{
                 }
                 App.draw(Menu2);
             }
-            App.draw(background);
-            App.draw(bottomText);
+
             App.display();
         }
 

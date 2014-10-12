@@ -66,6 +66,9 @@ public class Player extends MovableEntity{
             healthPoints=0;
     }
 
+   
+
+
     @Override
     public void detectCollision() {
         for(int i=0; i<EntityManager.getEntityList().size(); ++i) {

@@ -4,9 +4,11 @@
 
 
 ## Description
-
+Ce jeu vidéo à été conçu lors de la WonderJam d'octobre de l'UQAC.
+Le thème était: "La face cachée des Zombies!!!!" et les styles assignés à l'équipe étaient jeu de tir et rythmique .
 
 ## Informations
+Ce projet a été codé en java avec l'aide de la librairie JSFML.
 
 This software has been written by:
 * Steven GERARD

@@ -1,8 +1,6 @@
 package Screens;
 
 import static org.jsfml.graphics.Color.BLACK;
-import static org.jsfml.graphics.Color.WHITE;
-
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -58,23 +56,23 @@ public class GameLoop extends cScreen {
         EntityManager manager = EntityManager.getIntance();
 
         PlacePlayer PlayerSpawnManager = new PlacePlayer();
-        manager.addEntity(Player.getInstance());
+        EntityManager.addEntity(Player.getInstance());
 
         PlaceMobs MobsSpawnManager = new PlaceMobs(Player.getInstance(), "rsc/sound/Zelda3.serial");
         ArrayList<Mob> listeMobs = MobsSpawnManager.getMobsList();
         for (int i=0; i<listeMobs.size(); i++){
             try {
-                manager.addEntity(listeMobs.get(i));
+                EntityManager.addEntity(listeMobs.get(i));
             }
             catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
 
-        TextureManager texManager= new TextureManager(manager.getEntityList());
+        TextureManager texManager= new TextureManager(EntityManager.getEntityList());
 
         try {
-            PlayerSpawnManager.placement((Player) EntityManager.getEntity("Player", 0), App);
+            PlayerSpawnManager.placement(EntityManager.getEntity("Player", 0), App);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -117,7 +115,7 @@ public class GameLoop extends cScreen {
             App.draw(viewFinder);
 
             // Draw and update Game entity
-            for(GameBaseEntity it : manager.getEntityList()) {
+            for(GameBaseEntity it : EntityManager.getEntityList()) {
                 if(it.getPosition().x < 0 || it.getPosition().y < 0 || it.getPosition().x > App.getSize().x || it.getPosition().y > App.getSize().y) {
                     it.setVisible(false);
                 }
@@ -133,12 +131,12 @@ public class GameLoop extends cScreen {
                     Player.getInstance().updateDirection(pos, App.getSize());
                 }
                 if(it instanceof Bullet) {
-                    ((Bullet) it).detectCollision();
+                    it.detectCollision();
                 }
                 else if(it instanceof Player) {
-                    ((Player)it).detectCollision();
+                    it.detectCollision();
                 }
-                texManager.updateTexture(it, it.getId(), it.getDirection());
+                TextureManager.updateTexture(it, it.getId(), it.getDirection());
                 App.draw(it);
             }
 
@@ -147,17 +145,16 @@ public class GameLoop extends cScreen {
             playerHealthStatus.setFont(Font);
             playerHealthStatus.setCharacterSize((int)(1.50*taille_Font));
             playerHealthStatus.setString("Points de vie restants : "+Player.getInstance().getHealthPoints());
-            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width -10, App.getSize().y - playerHealthStatus.getLocalBounds().height - 10);
+            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width - 6, App.getSize().y - playerHealthStatus.getLocalBounds().height - 6);
             App.draw(playerHealthStatus);
 
-
-            for(int i = 0 ; i<manager.getEntityList().size() ; i++) {
-                if(!manager.getEntityList().get(i).isVisible()) {
+            for(int i = 0 ; i<EntityManager.getEntityList().size() ; i++) {
+                if(!EntityManager.getEntityList().get(i).isVisible()) {
                     System.out.println("Delete bullet");
-                    manager.getEntityList().remove(i);
+                    EntityManager.getEntityList().remove(i);
                 }
-                else if(!manager.getEntityList().get(i).isAlive() && manager.getEntityList().get(i) instanceof Mob) {
-                    ((Mob) manager.getEntityList().get(i)).decDieAnim();
+                else if(!EntityManager.getEntityList().get(i).isAlive() && EntityManager.getEntityList().get(i) instanceof Mob) {
+                    ((Mob) EntityManager.getEntityList().get(i)).decDieAnim();
                 }
             }
 

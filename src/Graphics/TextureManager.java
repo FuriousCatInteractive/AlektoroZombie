@@ -28,14 +28,14 @@ public class TextureManager {
 
         if(sprite instanceof Mob) {
             compteurAnimation[numero]++;
-            if (compteurAnimation[numero] == 60)
+            if (compteurAnimation[numero] == 40)
                 compteurAnimation[numero] = 0;
             //System.out.println(compteurAnimation);
         }
 
         switch (direction){
             case 1://bas
-                rect = new IntRect((compteurAnimation[numero]/15)*sprite.getTexture().getSize().x/4,
+                rect = new IntRect((compteurAnimation[numero]/10)*sprite.getTexture().getSize().x/4,
                         0,
                         sprite.getTexture().getSize().x/4,
                         sprite.getTexture().getSize().y/4);

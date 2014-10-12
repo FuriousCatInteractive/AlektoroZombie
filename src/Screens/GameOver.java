@@ -42,9 +42,21 @@ public class GameOver extends cScreen {
 
 
 
-        long debut_bootsplash = System.currentTimeMillis();
+
         int duree = 7000;
+
+
+
+        //Clearing screen
+        App.clear();
+        App.display();
         long current_time;
+        try {
+            Thread.sleep(800);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        long debut_bootsplash = System.currentTimeMillis();
         startMusic("rsc/sound/dramatic_chipmunks.wav");
 
         while (System.currentTimeMillis() - debut_bootsplash < duree && Running) {
@@ -92,10 +104,6 @@ public class GameOver extends cScreen {
                 dramatic.setScale(3.8f,3.8f);
                 App.draw(dramatic);
             }
-
-
-
-
 
             App.display();
 

@@ -17,7 +17,7 @@ public class Main {
         int WINDOW_W = 700;
 
         RenderWindow window1 = new RenderWindow();
-        window1.create(new VideoMode(WINDOW_W, WINDOW_H), "fenetre JSFML");//-1 = fullscreen
+        window1.create(new VideoMode(WINDOW_W, WINDOW_H), "AlektoroZombie");//-1 = fullscreen
         window1.setFramerateLimit(60);
         window1.setKeyRepeatEnabled(true);
         //window1.setMouseCursorVisible(false);
@@ -27,7 +27,7 @@ public class Main {
 
         //Applications variables
         cScreen[] Screens = new cScreen[6];
-        int screen = 4;
+        int screen = 0;
         Screens[0] = new BootSplash();
         Screens[1] = new Menu();
         Screens[2] = new SelectMusic();

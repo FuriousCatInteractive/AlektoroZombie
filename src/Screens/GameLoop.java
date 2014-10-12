@@ -11,6 +11,8 @@ import Entities.*;
 
 import Graphics.TextureManager;
 
+import org.jsfml.audio.Sound;
+import org.jsfml.audio.SoundBuffer;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
@@ -29,8 +31,15 @@ import PlaceEntities.PlacePlayer;
 public class GameLoop extends cScreen {
 
     Clock gameClock;
+    Sound sound;
 
     public int Run(RenderWindow App) {
+
+        CircleShape circle = new CircleShape(200);
+        circle.setOutlineColor(Color.GREEN);
+        circle.setFillColor(Color.TRANSPARENT);
+        circle.setOutlineThickness(1);
+        circle.setOrigin(-155,-170);
 
         //background
         Sprite background = new Sprite();
@@ -84,6 +93,7 @@ public class GameLoop extends cScreen {
         gameClock =new Clock();
         gameClock.restart();
 
+        startMusic("rsc/sound/ZeldaDance.ogg");
         while (App.isOpen()){
             Mob tempMonstre;
             long currentTime=gameClock.getElapsedTime().asMilliseconds();
@@ -99,6 +109,7 @@ public class GameLoop extends cScreen {
                 }
 
             if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
+                sound.stop();
                 return 2;
             }
             // On gère les événements
@@ -188,6 +199,7 @@ public class GameLoop extends cScreen {
                 if (((Player) EntityManager.getEntity("Player", 0)).getHealthPoints() <= 0) {
                     ((Player) EntityManager.getEntity("Player", 0)).reset();
                     EntityManager.getEntityList().clear();
+                    sound.stop();
                     return 4;
                 }
                 else {
@@ -198,6 +210,7 @@ public class GameLoop extends cScreen {
                     }
                     //victoire
                     if(win == true) {
+                        sound.stop();
                         return 5;
                     }
                 }
@@ -208,8 +221,28 @@ public class GameLoop extends cScreen {
 
             App.display();
             App.draw(background);
+            App.draw(circle);
         }
         return -1;//exit
+    }
+
+    private void startMusic(String path)
+    {
+        SoundBuffer soundBuffer = new SoundBuffer();
+        try {
+            soundBuffer.loadFromFile(Paths.get(path));
+            System.out.println("Sound duration: " + soundBuffer.getDuration().asSeconds() + " seconds");
+        } catch(IOException ex) {
+            //Something went wrong
+            System.err.println("Failed to load the sound:");
+            ex.printStackTrace();
+        }
+
+        //Create a sound and set its buffer
+        sound = new Sound();
+        sound.setBuffer(soundBuffer);
+        sound.play();
+        //sound.setVolume(40.0f);
     }
 }
 

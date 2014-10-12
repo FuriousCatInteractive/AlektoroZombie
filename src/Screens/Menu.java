@@ -146,12 +146,13 @@ public class Menu extends cScreen{
 
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.RETURN)) {
+                            sound.stop();
                             if (menu == 0) {
 
                                 return (2);
                             } else {
                                 //Let's get work...
-                                sound.stop();
+
                                 return (-1);
                             }
                         }

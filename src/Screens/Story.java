@@ -38,14 +38,16 @@ public class Story extends  cScreen {
                 "touche le monde entier depuis quelques années ne \n" +
                 "contamine que les êtres vivants doués d'un minimum\n " +
                 "d'intelligence, ce qui n'est pas le cas de ces\n " +
-                "gallinacée. Ils sont donc logiquement devenus \n" +
-                "l'espèce majoritaire sur la planète et cherchent\n" +
-                " à éliminer toute trace de notre ancienne civilisation \n" +
-                "en commencant par les ndividus les plus lents: les \n" +
-                "zombies. C'est anisi qu'ils sont devenus sujets à \n" +
-                "l'alektorophobie (la phobie des poulets). Aidez-donc\n" +
-                " Robert à se débarraser de ces créatures malfaisantes \n" +
-                "et sournoises, le tout en musique!!\n");
+                "gallinacés. Ces volatiles sont donc logiquement\n " +
+                "devenus l'espèce majoritaire sur la planète et \n" +
+                "cherchent à éliminer toute trace de notre \n" +
+                "ancienne civilisation en commencant par les \n" +
+                "individus les plus lents: les zombies. C'est \n" +
+                "anisi que ces morts-vivants sont devenus sujets \n" +
+                "à l'alektorophobie (la phobie des poulets). \n" +
+                "Aidez-donc notrami Robert à se débarrasser \n" +
+                "de ces créatures malfaisantes et sournoises,\n" +
+                " le tout en musique!!\n");
         scenario.setPosition( App.getSize().x/2-scenario.getLocalBounds().width/2, 100);
 
 
@@ -61,6 +63,9 @@ public class Story extends  cScreen {
                     if (event.type == event.type.CLOSED)
                     {
                         return (-1);
+                    }
+                    if(event.type == Event.Type.MOUSE_BUTTON_RELEASED) {
+                        return 1;
                     }
                     //Key pressed
                     if (event.type == Event.Type.KEY_PRESSED)

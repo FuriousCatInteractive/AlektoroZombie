@@ -66,7 +66,7 @@ public class GameLoop extends cScreen {
         Text playerHealthStatus = new Text();
         Text scoreStatus = new Text();
         Font Font = new Font();
-        int taille_Font = 15;
+        int taille_Font = 20;
         try {
             Font.loadFromFile(Paths.get("rsc/font/Frank Knows.ttf"));
         } catch (IOException e) {
@@ -188,7 +188,7 @@ public class GameLoop extends cScreen {
                     for(int cpt =0; cpt<circle.getPointCount();cpt++){
 
                         if(rectMob.contains(circle.getPoint(cpt).x + posCirclex, circle.getPoint(cpt).y + posCircley)) {
-                            System.out.println("caca" + circle.getPoint(cpt) + "+ " + circle.getPosition());
+                           // System.out.println("caca" + circle.getPoint(cpt) + "+ " + circle.getPosition());
                             intersect=true;
                         }
                     }
@@ -213,13 +213,13 @@ public class GameLoop extends cScreen {
             playerHealthStatus.setFont(Font);
             playerHealthStatus.setCharacterSize((int)(1.50*taille_Font));
             playerHealthStatus.setString("Points de vie restants : "+Player.getInstance().getHealthPoints());
-            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width -10, App.getSize().y - playerHealthStatus.getLocalBounds().height - 10);
+            playerHealthStatus.setPosition(App.getSize().x - playerHealthStatus.getLocalBounds().width -15, App.getSize().y - playerHealthStatus.getLocalBounds().height - 15);
             App.draw(playerHealthStatus);
 
             scoreStatus.setFont(Font);
             scoreStatus.setCharacterSize((int)(1.50*taille_Font));
             scoreStatus.setString("Score : "+ Score.getScore());
-            scoreStatus.setPosition(scoreStatus.getLocalBounds().width -10, App.getSize().y - scoreStatus.getLocalBounds().height - 10);
+            scoreStatus.setPosition(scoreStatus.getLocalBounds().width -15, App.getSize().y - scoreStatus.getLocalBounds().height - 20);
             App.draw(scoreStatus);
 
             for(int i = 0 ; i<EntityManager.getEntityList().size() ; i++) {

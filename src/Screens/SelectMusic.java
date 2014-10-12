@@ -128,6 +128,7 @@ public class SelectMusic extends cScreen{
                     }
 
                     if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+                        sound.stop();
                         event.asMouseEvent();
                         pos = Mouse.getPosition(App);
 
@@ -153,6 +154,7 @@ public class SelectMusic extends cScreen{
                     else if (event.type == Event.Type.KEY_PRESSED)
                     {
                         event.asKeyEvent();
+                        sound.stop();
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
                             return 1;
@@ -276,6 +278,7 @@ public class SelectMusic extends cScreen{
                 Menu2.setColor(Color.WHITE);
                 start.setColor(Color.WHITE);
                 retour.setColor(Color.RED);
+                sound.stop();
                 return 1;
             }
             else if (menu == 3) {
@@ -283,6 +286,7 @@ public class SelectMusic extends cScreen{
                 Menu2.setColor(Color.WHITE);
                 start.setColor(Color.RED);
                 retour.setColor(Color.WHITE);
+                sound.stop();
                 return 3;
             }
 

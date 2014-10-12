@@ -2,6 +2,7 @@ package Entities;
 
 import Graphics.TextureManager;
 import MoveBehavior.MoveBehavior;
+import org.jsfml.system.Vector2i;
 
 /**
  * Created by steven on 10/10/14.
@@ -62,4 +63,24 @@ public class Mob extends MovableEntity{
     {
     	return spawnTime;
     }
+
+    public void updateDirection(Vector2i pos, Vector2i sizeWindow) {
+        if(pos.x+pos.y>=sizeWindow.x){
+            if(sizeWindow.x-pos.x+pos.y>=sizeWindow.x){
+                this.setDirection(4);
+            }
+            else{
+                this.setDirection(2);
+            }
+        }
+        if(pos.x+pos.y<=sizeWindow.x) {
+            if (sizeWindow.x - pos.x + pos.y <= sizeWindow.x) {
+                this.setDirection(1);
+            }
+            else{
+                this.setDirection(3);
+            }
+        }
+    }
+
 }

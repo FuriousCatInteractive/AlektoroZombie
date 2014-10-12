@@ -13,6 +13,7 @@ import Graphics.TextureManager;
 
 import org.jsfml.graphics.*;
 import org.jsfml.system.Clock;
+import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
@@ -144,9 +145,15 @@ public class GameLoop extends cScreen {
                     }
                 }
 
+
                 if(it instanceof Player) {
                     Player.getInstance().updateDirection(pos, App.getSize());
                 }
+                else if (it instanceof Mob){
+                    Vector2i posMOb = new Vector2i((int)it.getPosition().x, (int)it.getPosition().y);
+                    ((Mob)(it)).updateDirection(posMOb, App.getSize());
+                }
+
                 if(it instanceof Bullet) {
                     it.detectCollision();
                 }
@@ -183,7 +190,7 @@ public class GameLoop extends cScreen {
                     e.printStackTrace();
                 }
 
-                return 4;
+                    return 4;
             }
 
             System.out.println(Player.getInstance().getHealthPoints() );

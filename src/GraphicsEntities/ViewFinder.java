@@ -30,7 +30,6 @@ public class ViewFinder implements Drawable{
         player.setVectorViewFinder(vectorMouse);
     }
 
-
     @Override
     public void draw(RenderTarget renderTarget, RenderStates renderStates) {
         renderTarget.draw(viewFinder, renderStates);

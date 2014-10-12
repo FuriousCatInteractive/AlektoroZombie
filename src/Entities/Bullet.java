@@ -11,7 +11,7 @@ public class Bullet extends MovableEntity {
     private Vector2f playerViewFinder;
 
     public Bullet(Player player, int id) {
-        super(new BulletMove(), 5);
+        super(new BulletMove(), 7);
         this.playerViewFinder = MathUtils.normalize(player.getVectorViewFinder());
         this.id = id;
         this.setPosition(player.getPosition());

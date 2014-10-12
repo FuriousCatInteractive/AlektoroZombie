@@ -104,13 +104,12 @@ public class SelectMusic extends cScreen{
                     //clic de la souris
                     if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                         event.asMouseEvent();
+                        sound.stop();
                         if (menu == 0) {
-                            sound.stop();
                             return (3);
                         }
                         else if (menu == 1){
                             //Let's get work...
-                            sound.stop();
                             return (3);
                         }
                         else if (menu == 2){
@@ -124,8 +123,10 @@ public class SelectMusic extends cScreen{
                     {
                         event.asKeyEvent();
 
-                        if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
+                        if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
+                            sound.stop();
                             return 1;
+                        }
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.DOWN)){
                             menu++;

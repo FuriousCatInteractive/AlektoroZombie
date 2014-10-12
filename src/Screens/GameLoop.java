@@ -255,7 +255,6 @@ public class GameLoop extends cScreen {
             Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
             viseur.setPosition(posViseur);
             App.draw(viseur);
-
             App.display();
             App.draw(background);
             App.draw(circle);

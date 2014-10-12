@@ -87,16 +87,6 @@ public class Menu extends cScreen{
         Menu2.setString("Exit");
         Menu2.setPosition(  App.getSize().x/2-Menu2.getLocalBounds().width/2, App.getSize().y/2+2*taille_Font);
 
-        Menu3.setFont(Font);
-        Menu3.setCharacterSize(taille_Font);
-        Menu3.setString("Continue");
-        Menu3.setPosition(  App.getSize().x/2-Menu3.getLocalBounds().width/2, App.getSize().y/2+4*taille_Font);
-
-        /*if (playing)
-        {
-            alpha = alpha_max;
-        }*/
-
         Vector2i pos = new Vector2i(0,0);
         startMusic("rsc/sound/king.it.ogg");
 
@@ -111,19 +101,15 @@ public class Menu extends cScreen{
                         return (-1);
                     }
 
-
                     if (event.type == Event.Type.MOUSE_MOVED) {
                         event.asMouseEvent();
                         pos = Mouse.getPosition(App);
 
                         if(Menu1.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 0;
-                            //System.out.println("menu1");
-
                         }
                         else if(Menu2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 1;
-                           // System.out.println("menu0");
                         }
                     }
 
@@ -161,9 +147,7 @@ public class Menu extends cScreen{
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.RETURN)) {
                             if (menu == 0) {
-                                //Let's get play !
-                                playing = true;
-                                sound.stop();
+
                                 return (2);
                             } else {
                                 //Let's get work...
@@ -193,23 +177,11 @@ public class Menu extends cScreen{
                 Menu3.setColor(new Color(255, 255, 255, 255));
             }
 
-            //Clearing screen
+
             App.clear();
-            //Drawing
-            //App.draw(Sprite);
             App.draw(Titre);
-            if (alpha == alpha_max)
-            {
-                if (playing)
-                {
-                    App.draw(Menu3);
-                }
-                else
-                {
-                    App.draw(Menu1);
-                }
-                App.draw(Menu2);
-            }
+            App.draw(Menu1);
+            App.draw(Menu2);
             App.draw(background);
             App.draw(bottomText);
             App.display();

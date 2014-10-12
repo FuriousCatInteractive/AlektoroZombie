@@ -59,14 +59,14 @@ public class GameLoop extends cScreen {
         while (App.isOpen()){
 
             if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
-                App.close();
+                return 2;
             }
             // On gère les événements
             for (Event event : App.pollEvents()) {
                 if (event.type == Event.Type.CLOSED) {
                     // Si l'utilisateur clique sur la croix rouge alors on ferme
                     // la fenêtre
-                    App.close();
+                    return 2;
                 }
 
                 if (event.type == Event.Type.MOUSE_MOVED) {

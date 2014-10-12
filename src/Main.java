@@ -33,6 +33,7 @@ public class Main {
         Screens[2] = new SelectMusic();
         Screens[3] = new GameLoop();
         Screens[4] = new GameOver();
+        Screens[5] = new Victory();
 
         while (screen >= 0) {
             screen = Screens[screen].Run(window1);

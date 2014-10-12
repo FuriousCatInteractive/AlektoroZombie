@@ -184,6 +184,9 @@ public class GameLoop extends cScreen {
                 }
 
                 return 4;
+            }else if(listeMobs.isEmpty()){
+            	//victoire
+            	return 5;
             }
 
             System.out.println(Player.getInstance().getHealthPoints() );
@@ -193,88 +196,3 @@ public class GameLoop extends cScreen {
         return -1;//exit
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -40,7 +40,7 @@ public class Menu extends cScreen{
 
         try {
             Texture maTexture = new Texture();
-            maTexture.loadFromFile(Paths.get("rsc/img/fond_menu.jpeg")); // on charge la texture qui se trouve dans notre dossier assets
+            maTexture.loadFromFile(Paths.get("rsc/img/fond_menu.png")); // on charge la texture qui se trouve dans notre dossier assets
             background.setTexture(maTexture); // on applique la texture à notre sprite
         } catch (IOException e) {
             e.printStackTrace();

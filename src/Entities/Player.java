@@ -16,10 +16,7 @@ public class Player extends MovableEntity{
 
     private Player() {
         super();
-        id = 0;
-        this.setPosition(50, 50);
-        this.vectorViewFinder = new Vector2f(0,0);
-        healthPoints = 3;
+        reset();
     }
 
     public final static Player getInstance() {
@@ -62,6 +59,8 @@ public class Player extends MovableEntity{
     @Override
     public void touch() {
         --healthPoints;
+        if(healthPoints<0)
+            healthPoints=0;
     }
 
    
@@ -90,5 +89,12 @@ public class Player extends MovableEntity{
     public int getHealthPoints()
     {
         return healthPoints;
+    }
+
+    public void reset(){
+        healthPoints=3;
+        id = 0;
+        this.setPosition(50, 50);
+        this.vectorViewFinder = new Vector2f(0,0);
     }
 }

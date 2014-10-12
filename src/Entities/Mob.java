@@ -7,6 +7,8 @@ import MoveBehavior.MoveBehavior;
  */
 public class Mob extends MovableEntity{
 
+	private long spawnTime;
+
     @Override
     public void touch() {
         this.setVisible(false);
@@ -17,10 +19,22 @@ public class Mob extends MovableEntity{
         this.id = id;
         this.setPosition(0,0);
     }
-    
-    public Mob(int id, MoveBehavior moveStrategy, int maxSpeed, int x, int y) {
+ 
+    public Mob(int id, MoveBehavior moveStrategy, int maxSpeed, boolean cartesien, int xOrAngle, int yOrRadius, long time) {
         super(moveStrategy, maxSpeed);
         this.id = id;
-        this.setPositionEntity(true,x,y);
+        if(cartesien)
+        {
+        	this.setPositionEntity(true,xOrAngle,yOrRadius);
+        }else if (!cartesien){
+        	this.setPositionEntity(false,xOrAngle,yOrRadius);
+        }
+        spawnTime = time;
+    }
+
+
+    public long getSpawnTime()
+    {
+    	return spawnTime;
     }
 }

@@ -84,10 +84,12 @@ public abstract class GameBaseEntity extends Sprite{
     	{
     		this.angle = XOrAngle;
     		this.radius = YOrRadius;
-    		this.setPosition((int)(radius * Math.cos(angle)), (int)(radius * Math.sin(angle)));
+    		this.setPosition((int)(Player.getInstance().getPosition().x+radius * Math.cos(angle)), 
+    							(int)(Player.getInstance().getPosition().y+radius * Math.sin(angle)));
     		
     	}
     }
+
 
     public int getDirection() {
         return direction;

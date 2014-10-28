@@ -9,7 +9,7 @@ Le thème était: "La face cachée des Zombies!!!!" et les styles assignés à l
 
 ## Informations
 Ce projet a été codé en java avec l'aide de la librairie JSFML.
-lien pour télécharger l'éxécutable en .jar: https://www.dropbox.com/s/s42qnlxwz6n3j0k/octobergamejam_jar.zip?dl=0
+[lien pour télécharger l'éxécutable en .jar](https://www.dropbox.com/s/aku53hdu9udbgyz/AlektoroZombie%20-%20WonderJam.zip?dl=0)
 
 This software has been written by:
 * Steven GERARD

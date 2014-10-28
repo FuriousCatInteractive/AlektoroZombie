@@ -21,7 +21,7 @@ public class SelectMusic extends cScreen{
     private boolean playing;
     Sound sound;
     private static int speedPlayerChoice = 1;
-    private static int musicPlayerChoice = 0;
+    private static int musicPlayerChoice = 1;
 
     public int Run(RenderWindow App){
 
@@ -128,7 +128,7 @@ public class SelectMusic extends cScreen{
                     }
 
                     if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-                        sound.stop();
+
                         event.asMouseEvent();
                         pos = Mouse.getPosition(App);
 
@@ -146,10 +146,12 @@ public class SelectMusic extends cScreen{
                         }
                         else if(retour.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
                             menu = 2;
+                            sound.stop();
                             // System.out.println("menu0");
                         }
                         else if(start.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
                             menu = 3;
+                            sound.stop();
                         }
                     }
 
@@ -371,7 +373,7 @@ public class SelectMusic extends cScreen{
             App.clear();
             Vector2f posViseur= new Vector2f((float)pos.x, (float)pos.y);
             viseur.setPosition(posViseur);
-            App.draw(viseur);
+
             App.draw(Titre);
             App.draw(retour);
             App.draw(start);
@@ -383,6 +385,7 @@ public class SelectMusic extends cScreen{
             App.draw(vitesse3);
             App.draw(vitesse4);
             App.draw(vitesse5);
+            App.draw(viseur);
             App.display();
         }
 

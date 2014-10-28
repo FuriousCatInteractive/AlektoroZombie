@@ -37,7 +37,7 @@ public class Menu extends cScreen{
         Sprite helpSprite = new Sprite();
         Texture textureSprite = new Texture();
         try {
-            textureSprite.loadFromFile(Paths.get("rsc/img/Sprite?.png"));
+            textureSprite.loadFromFile(Paths.get("rsc/img/Sprite_int.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

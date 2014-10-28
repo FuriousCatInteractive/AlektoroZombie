@@ -88,7 +88,7 @@ public class ScoreScreen extends cScreen {
                         event.asKeyEvent();
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
-                            return (-1);
+                            return (1);
                         else {
 
                             return 1;

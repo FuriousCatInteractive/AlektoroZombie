@@ -45,7 +45,7 @@ public class Story extends  cScreen {
                 "individus les plus lents: les zombies. C'est \n" +
                 "anisi que ces morts-vivants sont devenus sujets \n" +
                 "à l'alektorophobie (la phobie des poulets). \n" +
-                "Aidez-donc notrami Robert à se débarrasser \n" +
+                "Aidez-donc notre ami Robert à se débarasser \n" +
                 "de ces créatures malfaisantes et sournoises,\n" +
                 " le tout en musique!!\n");
         scenario.setPosition( App.getSize().x/2-scenario.getLocalBounds().width/2, 100);

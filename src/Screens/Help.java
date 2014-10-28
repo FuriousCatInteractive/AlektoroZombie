@@ -43,7 +43,7 @@ public class Help extends  cScreen {
                 "6.Ecoutez bien la musique, elle vous aidera\n" +
                 " à mieux appréhender les vagues de poulets !\n" +
                 "7.Bonne chance pour votre guerre\n" +
-                " contre ces saletés à plume.\n\n" +
+                " contre ces saletés à plumes.\n\n" +
                 "Appuyez sur une touche pour retouner à l'écran des titres.");
         scenario.setPosition( App.getSize().x/2-scenario.getLocalBounds().width/2, 100);
 
@@ -68,7 +68,7 @@ public class Help extends  cScreen {
                         event.asKeyEvent();
 
                         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
-                            return (-1);
+                            return (1);
                         else
                         {
 

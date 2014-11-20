@@ -12,7 +12,7 @@ Le thème était: "La face cachée des Zombies!!!!" et les styles assignés à l
 
 ## Informations
 Ce projet a été codé en java avec l'aide de la librairie JSFML et se joue à la souris.
-Le but est de viser et tirer sur tous les poulets qui arrivent en rhytme avec la musique.
+Le but est de viser et de tirer sur tous les poulets qui arrivent en rhytme avec la musique.
 
 [lien pour télécharger l'éxécutable en .jar](https://www.dropbox.com/s/aku53hdu9udbgyz/AlektoroZombie%20-%20WonderJam.zip?dl=0)
 
